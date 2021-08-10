@@ -1,0 +1,111 @@
+﻿@page
+@model IndexModel
+
+
+<div class="text-center">
+    <div class="row">
+        <div class="col-6">
+            <label>Fecha</label>
+            <input type="date" id="fecha" class="form-control" />
+        </div>
+        <div class="col-6">
+            <label>hora</label>
+            <input type="time" id="hora" class="form-control" step="1" />
+        </div>
+    </div>
+    <div class="row align-items-end">
+        <div class="col-6">
+            <label>Valor</label>
+            <input type="number" id="valor" class="form-control" />
+        </div>
+        <div class="col-6">
+            <button type="button" class="btn btn-primary form-control" onclick="PostData()">Escribir</button>
+        </div>
+    </div>
+    <div class="row align-items-end">
+        <div class="col-12">
+            <h2>Valores</h2>
+        </div>
+    </div>
+    <div class="row align-items-end">
+        <div class="col-12">
+            <table id="tabla_valores" class="table">
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts{ 
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetData();
+    });
+    function GetData() {
+        $.ajax({
+            type: "POST",
+            url: "/Home/GetData",
+            traditional: true,
+            success: (response) => {
+                if (response.success) {
+                    let process = JSON.parse(response.process);
+                    let data = JSON.parse(JSON.parse(response.data));
+                    console.log("process: ",process);
+                    console.log("data: ", data);
+                    $("#tabla_valores tbody").empty();
+                    $("#tabla_valores tbody").html(LlenarTabla(data));
+                } else {
+                    let process = JSON.parse(response.process);
+                    console.log(process);
+                }
+            }
+        });
+    }
+    function PostData() {
+        $.ajax({
+            type: "POST",
+            url: "/Home/PostData",
+            traditional: true,
+            data: {
+                "webId": "xdddd",
+                "fecha": $('#fecha').val(),
+                "hora": $('#hora').val(),
+                "valor": $('#valor').val()
+            },
+            success: (response) => {
+                if (response.success) {
+                    let process = JSON.parse(response.process);
+                    let data = response.data;
+                    console.log("process: ",process);
+                    console.log("data: ",data);
+                    console.log("--EXITO--");
+                    GetData();
+                } else {
+                    let process = JSON.parse(response.process);
+                    console.log(process);
+                    console.log("--FAIL--");
+                }
+            }
+        });
+    }
+    function LlenarTabla(data) {
+        var html="";
+        for (var i = 0; i < data.Items.length; i++) {
+            if (Number.isInteger(data.Items[i].Value)) {
+                html += "<tr>";
+                html += "<td>" + data.Items[i].Timestamp + "</td>";
+                html += "<td>" + data.Items[i].Value + "</td>";
+                html += "</tr>";
+            }
+        }
+        return html;
+    }
+</script>
+}
