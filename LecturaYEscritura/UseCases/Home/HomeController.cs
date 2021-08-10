@@ -15,6 +15,11 @@ namespace LecturaYEscritura.UseCases
     public class HomeController : Controller
     {
         private static string baseUrl = "https://l-srvpivision/piwebapi/";
+        private static string userName = @"cmbsaa\l-usrpiadmin";
+        private static string password = "Limaabril2021$";
+
+        private static List<WritableTag> WritableTagsList = new List<WritableTag>();        
+
         private class PIWebAPIInput
         {
             public string Timestamp { get; set; }
@@ -26,18 +31,79 @@ namespace LecturaYEscritura.UseCases
             {
             }
         }
+        private class WritableTag
+        {
+            public string Name { get; set; } 
+            public string WebId { get; set; } 
+            public string Path { get; set; }
+        }
+        private class TagListResponse
+        {
+            public string Name { get; set; } 
+            public string WebId { get; set; } 
+            public string Result { get; set; }
+        }
         public IActionResult Index()
         {
             return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> GetTagListValues()
+        {
+            WritableTagsList.Clear();
+            WritableTagsList.Add(new WritableTag { Name = "pruebaWEBAPI", WebId = "F1DP8mfxL4ZDU0K2ynkbula9xQBAIAAATC1TUlZQSURBXFBSVUVCQVdFQkFQSQ", Path = "\\\\l-srvpida\\pruebaWEBAPI" });
+            WritableTagsList.Add(new WritableTag { Name = "pruebaWEBAPI1", WebId = "F1DP8mfxL4ZDU0K2ynkbula9xQBQIAAATC1TUlZQSURBXFBSVUVCQVdFQkFQSTE", Path = "\\\\l-srvpida\\pruebaWEBAPI1" });
+            WritableTagsList.Add(new WritableTag { Name = "pruebaWEBAPI2", WebId = "F1DP8mfxL4ZDU0K2ynkbula9xQBgIAAATC1TUlZQSURBXFBSVUVCQVdFQkFQSTI", Path = "\\\\l-srvpida\\pruebaWEBAPI2" });
+            WritableTagsList.Add(new WritableTag { Name = "pruebaWEBAPI3", WebId = "F1DP8mfxL4ZDU0K2ynkbula9xQBwIAAATC1TUlZQSURBXFBSVUVCQVdFQkFQSTM", Path = "\\\\l-srvpida\\pruebaWEBAPI3" });
+            WritableTagsList.Add(new WritableTag { Name = "pruebaWEBAPI4", WebId = "F1DP8mfxL4ZDU0K2ynkbula9xQCAIAAATC1TUlZQSURBXFBSVUVCQVdFQkFQSTQ", Path = "\\\\l-srvpida\\pruebaWEBAPI4" });
+            WritableTagsList.Add(new WritableTag { Name = "pruebaWEBAPI5", WebId = "F1DP8mfxL4ZDU0K2ynkbula9xQCQIAAATC1TUlZQSURBXFBSVUVCQVdFQkFQSTU", Path = "\\\\l-srvpida\\pruebaWEBAPI5" });
+
+            dynamic response;
+            bool success = true;
+            var process = new List<string>(); 
+            var results = new List<TagListResponse>(); 
+            PIWebApiClient piWebAPIClient = new PIWebApiClient(userName, password);
+            foreach (var writeableTag in WritableTagsList)
+            {
+                try
+                {
+                    //Resolve tag path
+                    string requestUrl = baseUrl + "/streams/" + writeableTag.WebId + "/plot";
+                    string tget = await piWebAPIClient.GetAsync(requestUrl);
+                    process.Add("--------------------------------");
+                    process.Add("Asking for values of " + writeableTag.Name);
+                    process.Add("WebID " + writeableTag.WebId);
+                    process.Add("Processing...");
+                    results.Add(new TagListResponse { WebId = writeableTag.WebId , Name = writeableTag.Name, Result = tget}); 
+                    process.Add("Exito...");
+                }
+                catch (HttpRequestException ex)
+                {
+                    process.Add("Error...");
+                    process.Add(ex.Message); 
+                    success = false;
+                }
+                catch (Exception ex)
+                {
+                    process.Add("Error...");
+                    process.Add(ex.Message);
+                    success = false;
+                }
+            }
+            piWebAPIClient.Dispose();
+            response = new
+            {
+                success = success,
+                process = JsonConvert.SerializeObject(process),
+                data = JsonConvert.SerializeObject(results)
+            };
+            return Ok(response);
         }
         [HttpPost]
         public async Task<IActionResult> GetData()
         {
             dynamic response;
             var process = new List<string>();
-            string userName = @"cmbsaa\l-usrpiadmin";
-            string password = "Limaabril2021$";
-            //string tagPath = tagTextBox.Text;
             string webId = "F1DP8mfxL4ZDU0K2ynkbula9xQBAIAAATC1TUlZQSURBXFBSVUVCQVdFQkFQSQ";
             PIWebApiClient piWebAPIClient = new PIWebApiClient(userName, password);
             try
@@ -73,7 +139,6 @@ namespace LecturaYEscritura.UseCases
             }
             finally
             {
-                //We are closing the HttpClient after every write in this simple example. This is not necessary.
                 piWebAPIClient.Dispose();
             }
             
@@ -83,11 +148,7 @@ namespace LecturaYEscritura.UseCases
         public async Task<IActionResult> PostData(string webId, string fecha,string hora,int valor)
         {
             dynamic response;
-            var process = new List<string>();
-            string userName = @"cmbsaa\l-usrpiadmin";
-            string password = "Limaabril2021$";
-            //string tagPath = tagTextBox.Text;
-            webId = "F1DP8mfxL4ZDU0K2ynkbula9xQBAIAAATC1TUlZQSURBXFBSVUVCQVdFQkFQSQ";
+            var process = new List<string>();            
             PIWebApiClient piWebAPIClient = new PIWebApiClient(userName, password);
             try
             {
@@ -96,7 +157,6 @@ namespace LecturaYEscritura.UseCases
                 string timeSpan;
                 if(DateTime.TryParse(fecha + " " + hora, out toTimeSpan))
                 {
-                    //DateTime.Now.ToString("yyyy’-‘MM’-‘dd’T’HH’:’mm’:’ss.fffffffK")
                     timeSpan = toTimeSpan.ToString("yyyy-MM-ddTHH:mm:ssZ");
                 }
                 else
@@ -138,20 +198,10 @@ namespace LecturaYEscritura.UseCases
             }
             finally
             {
-                //We are closing the HttpClient after every write in this simple example. This is not necessary.
                 piWebAPIClient.Dispose();
             }
             
             return Ok(response);
         }
-        /*
-        {
-            "Timestamp": "2021-08-03T21:07:08Z",
-            "Value": 10.0,
-            "UnitsAbbreviation": "",
-            "Good": true,
-            "Questionable": false
-        }
-         */
     }
 }
