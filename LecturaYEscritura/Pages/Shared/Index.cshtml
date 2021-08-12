@@ -2,232 +2,365 @@
 @model IndexModel
 
 
-<div class="text-center">    
-    <div class="row align-items-end">
-        <div class="col-12">
-            <h2>Valores</h2>
+<div class="row d-flex justify-content-center">
+    <div class="col-12 col-md-6">
+        <div class="search-bar">
+            <div class="input">
+                <input type="text" class="input-with-icon" placeholder="Busca un Tag">
+                <span class="iconify" data-inline="false" data-icon="akar-icons:search" style="font-size: 24px;"></span>
+            </div>
         </div>
     </div>
-    <div class="row align-items-start" id="cards">
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-sm-12 col-md-6 col-lg-4">
-            <button class="btn btn-primary" onclick="SaveData()">Guardar</button>
+    <div class="col-12">
+        <div class="search-bar d-flex justify-content-between">
+            <div>
+                <span id="list-view" class="view-switcher">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 8C4.55228 8 5 7.55228 5 7C5 6.44772 4.55228 6 4 6C3.44772 6 3 6.44772 3 7C3 7.55228 3.44772 8 4 8Z" fill="#C4C4C4" />
+                        <path d="M4 13C4.55228 13 5 12.5523 5 12C5 11.4477 4.55228 11 4 11C3.44772 11 3 11.4477 3 12C3 12.5523 3.44772 13 4 13Z" fill="#C4C4C4" />
+                        <path d="M4 18C4.55228 18 5 17.5523 5 17C5 16.4477 4.55228 16 4 16C3.44772 16 3 16.4477 3 17C3 17.5523 3.44772 18 4 18Z" fill="#C4C4C4" />
+                        <path d="M20.06 11H7.94C7.42085 11 7 11.4209 7 11.94V12.06C7 12.5791 7.42085 13 7.94 13H20.06C20.5791 13 21 12.5791 21 12.06V11.94C21 11.4209 20.5791 11 20.06 11Z" fill="#C4C4C4" />
+                        <path d="M20.06 16H7.94C7.42085 16 7 16.4209 7 16.94V17.06C7 17.5791 7.42085 18 7.94 18H20.06C20.5791 18 21 17.5791 21 17.06V16.94C21 16.4209 20.5791 16 20.06 16Z" fill="#C4C4C4" />
+                        <path d="M20.06 6H7.94C7.42085 6 7 6.42085 7 6.94V7.06C7 7.57915 7.42085 8 7.94 8H20.06C20.5791 8 21 7.57915 21 7.06V6.94C21 6.42085 20.5791 6 20.06 6Z" fill="#C4C4C4" />
+                    </svg>
+                </span>
+                <span class="text-tag">|</span>
+                <span id="grid-view" class="view-switcher">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1 2.5C1 2.10218 1.15804 1.72064 1.43934 1.43934C1.72064 1.15804 2.10218 1 2.5 1H5.5C5.89782 1 6.27936 1.15804 6.56066 1.43934C6.84196 1.72064 7 2.10218 7 2.5V5.5C7 5.89782 6.84196 6.27936 6.56066 6.56066C6.27936 6.84196 5.89782 7 5.5 7H2.5C2.10218 7 1.72064 6.84196 1.43934 6.56066C1.15804 6.27936 1 5.89782 1 5.5V2.5ZM9 2.5C9 2.10218 9.15804 1.72064 9.43934 1.43934C9.72064 1.15804 10.1022 1 10.5 1H13.5C13.8978 1 14.2794 1.15804 14.5607 1.43934C14.842 1.72064 15 2.10218 15 2.5V5.5C15 5.89782 14.842 6.27936 14.5607 6.56066C14.2794 6.84196 13.8978 7 13.5 7H10.5C10.1022 7 9.72064 6.84196 9.43934 6.56066C9.15804 6.27936 9 5.89782 9 5.5V2.5ZM1 10.5C1 10.1022 1.15804 9.72064 1.43934 9.43934C1.72064 9.15804 2.10218 9 2.5 9H5.5C5.89782 9 6.27936 9.15804 6.56066 9.43934C6.84196 9.72064 7 10.1022 7 10.5V13.5C7 13.8978 6.84196 14.2794 6.56066 14.5607C6.27936 14.842 5.89782 15 5.5 15H2.5C2.10218 15 1.72064 14.842 1.43934 14.5607C1.15804 14.2794 1 13.8978 1 13.5V10.5ZM9 10.5C9 10.1022 9.15804 9.72064 9.43934 9.43934C9.72064 9.15804 10.1022 9 10.5 9H13.5C13.8978 9 14.2794 9.15804 14.5607 9.43934C14.842 9.72064 15 10.1022 15 10.5V13.5C15 13.8978 14.842 14.2794 14.5607 14.5607C14.2794 14.842 13.8978 15 13.5 15H10.5C10.1022 15 9.72064 14.842 9.43934 14.5607C9.15804 14.2794 9 13.8978 9 13.5V10.5Z" fill="#C4C4C4" />
+                    </svg>
+                </span>
+            </div>
+
         </div>
     </div>
 </div>
 
-@section Scripts{ 
-<script type="text/javascript">
-    var webIds = [];
-    $(document).ready(function () {
-        GetTagListValues();
-    });    
-    //function GetData() {
-    //    $.ajax({
-    //        type: "POST",
-    //        url: "/Home/GetData",
-    //        traditional: true,
-    //        success: (response) => {
-    //            if (response.success) {
-    //                let process = JSON.parse(response.process);
-    //                let data = JSON.parse(JSON.parse(response.data));
-    //                console.log("process: ",process);
-    //                console.log("data: ", data);
-    //                $("#tabla_valores tbody").empty();
-    //                $("#tabla_valores tbody").html(LlenarTabla(data));
-    //            } else {
-    //                let process = JSON.parse(response.process);
-    //                console.log(process);
-    //            }
-    //        }
-    //    });
-    //}
-    //function LlenarTabla(data) {
-    //    var html = "";
-    //    for (var i = 0; i < data.Items.length; i++) {
-    //        if (Number.isInteger(data.Items[i].Value)) {
-    //            html += "<tr>";
-    //            html += "<td>" + data.Items[i].Timestamp + "</td>";
-    //            html += "<td>" + data.Items[i].Value + "</td>";
-    //            html += "</tr>";
-    //        }
-    //    }
-    //    return html;
-    //}
-    //function PostData() {
-    //    $.ajax({
-    //        type: "POST",
-    //        url: "/Home/PostData",
-    //        traditional: true,
-    //        data: {
-    //            "webId": "xdddd",
-    //            "fecha": $('#fecha').val(),
-    //            "hora": $('#hora').val(),
-    //            "valor": $('#valor').val()
-    //        },
-    //        success: (response) => {
-    //            if (response.success) {
-    //                let process = JSON.parse(response.process);
-    //                let data = response.data;
-    //                console.log("process: ",process);
-    //                console.log("data: ",data);
-    //                console.log("--EXITO--");
-    //                GetData();
-    //            } else {
-    //                let process = JSON.parse(response.process);
-    //                console.log(process);
-    //                console.log("--FAIL--");
-    //            }
-    //        }
-    //    });
-    //}
-    //Get Tag List Values
-    function GetTagListValues() {
-        var data = [];
-        var html = "";
-        var values = [];
-        webIds.length = 0;
-        data.length = 0;
-        $('#cards').empty();
-        $.ajax({
-            type: "POST",
-            url: "/Home/GetTagListValues",
-            traditional: true,
-            success: (response) => {                
-                let process = JSON.parse(response.process);                
-                for (let i = 0; i < process.length; i++) {
-                    console.log(process[i]);
-                }
-                if (response.success) {
-                    data = JSON.parse(response.data);
-                    console.log("data",data);
-                    for (let i = 0; i < data.length; i++) {
-                        console.log("--------------------------------");
-                        console.log(data[i].Name);
-                        console.log(data[i].WebId);
-                        webIds.push(data[i].WebId);
-                        values.push(JSON.parse(JSON.parse(data[i].Result)));
-                        html += LoadCards(JSON.parse(JSON.parse(data[i].Result)), data[i].Name, data[i].WebId);
-                        console.log(JSON.parse(JSON.parse(data[i].Result)));
-                    }
-                    $('#cards').html(html);
-                }
-            }
-        });
-    }
-    function LoadCards(data, name, webId) {
-        var html = "";
-        var lastValue = GetLastValue(data.Items)
-        html += "<div class=\"col-sm-12 col-md-6 col-lg-4 mb-2\">";
-        html += "<div class=\"card\" id=\"" + webId + "\">";
-        html += "<div class=\"card-header\">" + name + "</div>";
-        html += "<div class=\"card-body\">";
-        html += "<div class=\"row\">";
-        html += "<div class=\"col-12\">";
-        html += "<span class=\"text-danger\" id=\"danger_" + webId + "\"/></span>";
-        html += "</div>";
-        html += "</div>";
-        html += "<div class=\"row\">";
-        html += "<div class=\"col-6\">";
-        html += "<input type=\"date\" id=\"date_" + webId + "\" class=\"form-control\" />";
-        html += "</div>";
-        html += "<div class=\"col-6\">";
-        html += "<input type=\"time\" id=\"time_" + webId + "\" class=\"form-control\" step=\"1\" />";
-        html += "</div>";
-        html += "</div>";
-        html += "<div class=\"row\">";
-        html += "<div class=\"col-12\">";
-        html += "<input type=\"number\" id=\"value_" + webId + "\" class=\"form-control\" />";
-        html += "</div>";
-        html += "</div>";
-        html += "<div class=\"row\">";
-        html += "<div class=\"col-12\">";
-        if (Number.isInteger(lastValue.value)) {
-            html += "<label>Última Fecha:" + lastValue.date + "</label>";
-        } else {
-            html += "<label>Última Fecha: No Disponible</label>";
-        }
-        html += "</div>";
-        html += "</div>";
-        html += "<div class=\"row\">";
-        html += "<div class=\"col-12\">";
-        if (Number.isInteger(lastValue.value)) {
-            html += "<label>Último Valor:" + lastValue.value + "</label>";
-        } else {
-            html += "<label>Último Valor: No Disponible</label>";
-        }
-        html += "</div>";
-        html += "</div>";
-        html += "</div>";
-        html += "</div>";
-        html += "</div>";
-        return html;
-    }
-    function GetLastValue(data) {
-        var value = data[0].Value;
-        var date = data[0].Timestamp;
-        for (let i = 1; i < data.length; i++) {
-            if (data[i].Timestamp > date) {
-                if (Number.isInteger(data[i].Value)) {
-                    value = data[i].Value;
-                    date = data[i].Timestamp;
-                }
-            }
-        }
-        var obj = {
-            "value" : value,
-            "date" : date
-        };
-        return obj
-    }
-    //Post Values
-    function SaveData() {
-        for (let i = 0; i < webIds.length; i++) {
-            PostValue(webIds[i]);
-        }
-    }
-    function PostValue(webId) {
-        var dateText = '#date_' + webId;
-        var timeText = '#time_' + webId;
-        var valueText = '#value_' + webId;
-        var date = $(dateText).val();
-        var time = $(timeText).val();
-        var value = $(valueText).val();
-        if (ValidateData(date, time, value, webId))
-            $.ajax({
-                type: "POST",
-                url: "/Home/PostData",
-                traditional: true,
-                data: {
-                    "webId": webId,
-                    "fecha": date,
-                    "hora": time,
-                    "valor": value
-                },
-                success: (response) => {
-                    let process = JSON.parse(response.process);
-                    console.log("process: ", process);
-                    if (response.success) {
-                        let data = response.data;
-                        console.log("data: ", data);
-                        console.log("--EXITO--");
-                        GetTagListValues();
-                    } else {
-                        console.log(process);
-                        console.log("--FAIL--");
-                    }
-                }
+<div class="tags-main-container col-12 mt-2" id="cards">
+    
+</div>
+
+<div class="div-footer">
+    <div class="fixed-footer">
+        <div>
+            <button class="button button-primary">Guardar Todos</button>
+            <button class="button-rounded button-secondary">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 20C16.4 20 20 16.4 20 12C20 7.6 16.4 4 12 4C7.6 4 4 7.6 4 12C4 16.4 7.6 20 12 20ZM12 2C17.5 2 22 6.5 22 12C22 17.5 17.5 22 12 22C6.5 22 2 17.5 2 12C2 6.5 6.5 2 12 2ZM12.5 12.8L7.7 15.6L7 14.2L11 11.9V7H12.5V12.8Z" fill="#C4C4C4" />
+                </svg>
+            </button>
+            <button class="button-rounded button-tertiary" id="button" aria-describedby="tooltip">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0)">
+                        <path d="M5.673 0C5.85865 0 6.0367 0.0737498 6.16797 0.205025C6.29925 0.336301 6.373 0.514348 6.373 0.7V2.009H13.89V0.709C13.89 0.523348 13.9637 0.345301 14.095 0.214025C14.2263 0.0827498 14.4043 0.009 14.59 0.009C14.7757 0.009 14.9537 0.0827498 15.085 0.214025C15.2162 0.345301 15.29 0.523348 15.29 0.709V2.009H18C18.5303 2.009 19.0388 2.21958 19.4139 2.59443C19.7889 2.96929 19.9997 3.47774 20 4.008V18.001C19.9997 18.5313 19.7889 19.0397 19.4139 19.4146C19.0388 19.7894 18.5303 20 18 20H2C1.46974 20 0.961184 19.7894 0.58614 19.4146C0.211096 19.0397 0.00026513 18.5313 0 18.001L0 4.008C0.00026513 3.47774 0.211096 2.96929 0.58614 2.59443C0.961184 2.21958 1.46974 2.009 2 2.009H4.973V0.699C4.97327 0.513522 5.04713 0.335731 5.17838 0.204672C5.30963 0.0736123 5.48752 -1.89263e-07 5.673 0V0ZM1.4 7.742V18.001C1.4 18.0798 1.41552 18.1578 1.44567 18.2306C1.47583 18.3034 1.52002 18.3695 1.57574 18.4253C1.63145 18.481 1.69759 18.5252 1.77039 18.5553C1.84319 18.5855 1.92121 18.601 2 18.601H18C18.0788 18.601 18.1568 18.5855 18.2296 18.5553C18.3024 18.5252 18.3685 18.481 18.4243 18.4253C18.48 18.3695 18.5242 18.3034 18.5543 18.2306C18.5845 18.1578 18.6 18.0798 18.6 18.001V7.756L1.4 7.742ZM6.667 14.619V16.285H5V14.619H6.667ZM10.833 14.619V16.285H9.167V14.619H10.833ZM15 14.619V16.285H13.333V14.619H15ZM6.667 10.642V12.308H5V10.642H6.667ZM10.833 10.642V12.308H9.167V10.642H10.833ZM15 10.642V12.308H13.333V10.642H15ZM4.973 3.408H2C1.92121 3.408 1.84319 3.42352 1.77039 3.45367C1.69759 3.48382 1.63145 3.52802 1.57574 3.58374C1.52002 3.63945 1.47583 3.70559 1.44567 3.77839C1.41552 3.85119 1.4 3.92921 1.4 4.008V6.343L18.6 6.357V4.008C18.6 3.92921 18.5845 3.85119 18.5543 3.77839C18.5242 3.70559 18.48 3.63945 18.4243 3.58374C18.3685 3.52802 18.3024 3.48382 18.2296 3.45367C18.1568 3.42352 18.0788 3.408 18 3.408H15.29V4.337C15.29 4.52265 15.2162 4.7007 15.085 4.83197C14.9537 4.96325 14.7757 5.037 14.59 5.037C14.4043 5.037 14.2263 4.96325 14.095 4.83197C13.9637 4.7007 13.89 4.52265 13.89 4.337V3.408H6.373V4.328C6.373 4.51365 6.29925 4.6917 6.16797 4.82297C6.0367 4.95425 5.85865 5.028 5.673 5.028C5.48735 5.028 5.3093 4.95425 5.17803 4.82297C5.04675 4.6917 4.973 4.51365 4.973 4.328V3.408Z" fill="#C4C4C4" />
+                    </g>
+                    <defs>
+                        <clipPath id="clip0">
+                            <rect width="20" height="20" fill="white" />
+                        </clipPath>
+                    </defs>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+    @*<div class="text-center">
+        <div class="row align-items-end">
+            <div class="col-12">
+                <h2>Valores</h2>
+            </div>
+        </div>
+        <div class="row align-items-start" id="cards">
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <button class="btn btn-primary" onclick="SaveData()">Guardar</button>
+            </div>
+        </div>
+    </div>*@
+
+    @section Scripts{
+        <script type="text/javascript">
+            var webIds = [];
+            $(document).ready(function () {
+                /*GetTagListValues();*/
             });
+            //function GetData() {
+            //    $.ajax({
+            //        type: "POST",
+            //        url: "/Home/GetData",
+            //        traditional: true,
+            //        success: (response) => {
+            //            if (response.success) {
+            //                let process = JSON.parse(response.process);
+            //                let data = JSON.parse(JSON.parse(response.data));
+            //                console.log("process: ",process);
+            //                console.log("data: ", data);
+            //                $("#tabla_valores tbody").empty();
+            //                $("#tabla_valores tbody").html(LlenarTabla(data));
+            //            } else {
+            //                let process = JSON.parse(response.process);
+            //                console.log(process);
+            //            }
+            //        }
+            //    });
+            //}
+            //function LlenarTabla(data) {
+            //    var html = "";
+            //    for (var i = 0; i < data.Items.length; i++) {
+            //        if (Number.isInteger(data.Items[i].Value)) {
+            //            html += "<tr>";
+            //            html += "<td>" + data.Items[i].Timestamp + "</td>";
+            //            html += "<td>" + data.Items[i].Value + "</td>";
+            //            html += "</tr>";
+            //        }
+            //    }
+            //    return html;
+            //}
+            //function PostData() {
+            //    $.ajax({
+            //        type: "POST",
+            //        url: "/Home/PostData",
+            //        traditional: true,
+            //        data: {
+            //            "webId": "xdddd",
+            //            "fecha": $('#fecha').val(),
+            //            "hora": $('#hora').val(),
+            //            "valor": $('#valor').val()
+            //        },
+            //        success: (response) => {
+            //            if (response.success) {
+            //                let process = JSON.parse(response.process);
+            //                let data = response.data;
+            //                console.log("process: ",process);
+            //                console.log("data: ",data);
+            //                console.log("--EXITO--");
+            //                GetData();
+            //            } else {
+            //                let process = JSON.parse(response.process);
+            //                console.log(process);
+            //                console.log("--FAIL--");
+            //            }
+            //        }
+            //    });
+            //}
+            //Get Tag List Values
+            function GetTagListValues() {
+                var data = [];
+                var html = "";
+                var values = [];
+                webIds.length = 0;
+                data.length = 0;
+                $('#cards').empty();
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/GetTagListValues",
+                    traditional: true,
+                    success: (response) => {
+                        let process = JSON.parse(response.process);
+                        for (let i = 0; i < process.length; i++) {
+                            console.log(process[i]);
+                        }
+                        if (response.success) {
+                            data = JSON.parse(response.data);
+                            console.log("data", data);
+                            for (let i = 0; i < data.length; i++) {
+                                console.log("--------------------------------");
+                                console.log(data[i].Name);
+                                console.log(data[i].WebId);
+                                webIds.push(data[i].WebId);
+                                values.push(JSON.parse(JSON.parse(data[i].Result)));
+                                html += LoadCards(JSON.parse(JSON.parse(data[i].Result)), data[i].Name, data[i].WebId);
+                                console.log(JSON.parse(JSON.parse(data[i].Result)));
+                            }
+                            $('#cards').html(html);
+                        }
+                    }
+                });
+            }
+            function LoadCards(data, name, webId) {
+                var html = "";
+                var lastValue = GetLastValue(data.Items);
+
+                html = `<div class="tag-container">
+                            <div class="tag-item active" id="${webId}">
+                                <div class="tag-disposition">
+                                    <div class="tag-item-header">
+                                        <div class="tag-item-title">
+                                            <span class="text-tag fw-600">${name}</span>
+                                        </div>
+                                        <div class="tag-item-separator-list"></div>
+                                        <div class="tag-item-inputs">
+                                            <div class="row d-flex justify-content-center">
+                                                <div class="col-6 custom-col-4">
+                                                    <div class="input">
+                                                        <input type="number" id="value_${webId}" class="form-control-custom" placeholder="Valor">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-6 custom-col-4">
+                                                    <div class="input">
+                                                        <input type="time" id="time_${webId}" class="form-control-custom" placeholder="hh/mm">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 custom-col-4">
+                                                    <div class="input">
+                                                        <input type="date" id="date_${webId}" class="form-control-custom" placeholder="dd/mm/yyyy">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tag-item-details collapse" id="collapseDetail${webId}">
+                                        <div class="tag-item-details-content">
+                                            <div class="tag-item-details-title">
+                                                <span class="text-tag fw-600">Datos del Tag</span>
+                                            </div>
+                                            <div class="tag-item-details-body">
+                                                <div class="col-12">
+                                                    <span class="text-tag fw-600">Último Valor:  <span class="fw-400">${Number.isInteger(lastValue.value) ? lastValue.value : 'No Disponible'}</span></span>
+                                                </div>
+                                                <div class="col-12">
+                                                    <span class="text-tag fw-600">Última Fecha: <span class="fw-400">${Number.isInteger(lastValue.date) ? lastValue.date : 'No Disponible'} </span></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tag-item-footer-grid">
+                                        <div class="tag-item-dropdown">
+                                            <div class="tag-item-button-dropdown collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetail${webId}" aria-expanded="false" aria-controls="collapseDetail${webId}">
+                                                <svg width="10" height="10" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4 6L0.535898 -1.75695e-07L7.4641 4.29987e-07L4 6Z" fill="white" />
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tag-item-footer-list">
+                                    <div class="tag-item-dropdown">
+                                        <div class="tag-item-button-dropdown collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetail${webId}" aria-expanded="false" aria-controls="collapseDetail${webId}">
+                                            <svg width="10" height="10" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M4 6L0.535898 -1.75695e-07L7.4641 4.29987e-07L4 6Z" fill="white" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`
+               
+                //html += "<div class=\"col-sm-12 col-md-6 col-lg-4 mb-2\">";
+                //html += "<div class=\"card\" id=\"" + webId + "\">";
+                //html += "<div class=\"card-header\">" + name + "</div>";
+                //html += "<div class=\"card-body\">";
+                //html += "<div class=\"row\">";
+                //html += "<div class=\"col-12\">";
+                //html += "<span class=\"text-danger\" id=\"danger_" + webId + "\"/></span>";
+                //html += "</div>";
+                //html += "</div>";
+                //html += "<div class=\"row\">";
+                //html += "<div class=\"col-6\">";
+                //html += "<input type=\"date\" id=\"date_" + webId + "\" class=\"form-control\" />";
+                //html += "</div>";
+                //html += "<div class=\"col-6\">";
+                //html += "<input type=\"time\" id=\"time_" + webId + "\" class=\"form-control\" step=\"1\" />";
+                //html += "</div>";
+                //html += "</div>";
+                //html += "<div class=\"row\">";
+                //html += "<div class=\"col-12\">";
+                //html += "<input type=\"number\" id=\"value_" + webId + "\" class=\"form-control\" />";
+                //html += "</div>";
+                //html += "</div>";
+                //html += "<div class=\"row\">";
+                //html += "<div class=\"col-12\">";
+                //if (Number.isInteger(lastValue.value)) {
+                //    html += "<label>Última Fecha:" + lastValue.date + "</label>";
+                //} else {
+                //    html += "<label>Última Fecha: No Disponible</label>";
+                //}
+                //html += "</div>";
+                //html += "</div>";
+                //html += "<div class=\"row\">";
+                //html += "<div class=\"col-12\">";
+                //if (Number.isInteger(lastValue.value)) {
+                //    html += "<label>Último Valor:" + lastValue.value + "</label>";
+                //} else {
+                //    html += "<label>Último Valor: No Disponible</label>";
+                //}
+                //html += "</div>";
+                //html += "</div>";
+                //html += "</div>";
+                //html += "</div>";
+                //html += "</div>";
+
+                return html;
+            }
+            function GetLastValue(data) {
+                var value = data[0].Value;
+                var date = data[0].Timestamp;
+                for (let i = 1; i < data.length; i++) {
+                    if (data[i].Timestamp > date) {
+                        if (Number.isInteger(data[i].Value)) {
+                            value = data[i].Value;
+                            date = data[i].Timestamp;
+                        }
+                    }
+                }
+                var obj = {
+                    "value": value,
+                    "date": date
+                };
+                return obj
+            }
+            //Post Values
+            function SaveData() {
+                for (let i = 0; i < webIds.length; i++) {
+                    PostValue(webIds[i]);
+                }
+            }
+            function PostValue(webId) {
+                var dateText = '#date_' + webId;
+                var timeText = '#time_' + webId;
+                var valueText = '#value_' + webId;
+                var date = $(dateText).val();
+                var time = $(timeText).val();
+                var value = $(valueText).val();
+                if (ValidateData(date, time, value, webId))
+                    $.ajax({
+                        type: "POST",
+                        url: "/Home/PostData",
+                        traditional: true,
+                        data: {
+                            "webId": webId,
+                            "fecha": date,
+                            "hora": time,
+                            "valor": value
+                        },
+                        success: (response) => {
+                            let process = JSON.parse(response.process);
+                            console.log("process: ", process);
+                            if (response.success) {
+                                let data = response.data;
+                                console.log("data: ", data);
+                                console.log("--EXITO--");
+                                GetTagListValues();
+                            } else {
+                                console.log(process);
+                                console.log("--FAIL--");
+                            }
+                        }
+                    });
+            }
+            function ValidateData(date, time, value, webId) {
+                var result = true;
+                if (!(date.length > 0) && !(time.length > 0) && value == "") {
+                    result = false;
+                    $('#danger_' + webId).empty();
+                    $('#danger_' + webId).text("No se envió la información, todos los campos deben estar completos")
+                }
+                return result;
+            }
+        </script>
     }
-    function ValidateData(date, time, value,webId) {
-        var result = true;
-        if (!(date.length > 0) && !(time.length > 0) && value == "") {
-            result = false;
-            $('#danger_' + webId).empty();
-            $('#danger_' + webId).text("No se envió la información, todos los campos deben estar completos")
-        }
-        return result;
-    }
-</script>
-}

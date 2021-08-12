@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+}
+
+.custom-navbar {
+    background-color: #0D5B98;
+}
+
+.custom-navbar ul {
+    margin: 0;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.custom-navbar ul li{
+    list-style: none;
+}
+
+.custom-navbar ul li a{
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.main-content {
+    margin-top: 1em;
+    margin-bottom: 60px;
+}
+
+.search-bar {
+    padding: 0 10px;
+}
+
+/*INPUTS*/
+.input {
+    position: relative;
+    margin: 7px 0px;
+}
+
+.input input, .input select {
+    width: 100%;
+    outline: none;
+    border: 1px solid #C4C4C4;
+    border-radius: 5px;
+    height: 40px;
+    transition: 0.3s;
+}
+
+.input input:focus, .input select:focus {
+    border: 1px solid #0D5B98;
+}
+
+.input input::placeholder {
+    color: #C4C4C4;
+}
+
+.input .form-control-custom {
+    padding: .375rem .75rem;
+}
+
+.input svg {
+    position: absolute;
+    left: 10px;
+    top: 9px;
+}
+
+.input input.input-with-icon {
+    padding-left: 2.5em;
+}
+
+.input svg path {
+    transition: 0.3s;
+    stroke: #C4C4C4;
+}
+
+.input input.input-with-icon:focus + svg path{
+    stroke: #0D5B98;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+    background: url('../img/icons/time-icon.svg') center/80% no-repeat;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator {
+    background: url('../img/icons/time-icon.svg') center/80% no-repeat;
+    opacity: 1;
+}
+
+input[type="time"]:focus::-webkit-calendar-picker-indicator {
+    background: url('../img/icons/time-color-icon.svg') center/80% no-repeat;
+}
+
+/*input[type="date"]::-webkit-inner-spin-button {*/
+/*    opacity: 0*/
+/*}*/
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: url('../img/icons/date-icon.svg') center/80% no-repeat;
+    opacity: 0.8;
+    transition: 0.3s;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    background: url('../img/icons/date-icon.svg') center/80% no-repeat;
+    opacity: 1;
+}
+
+input[type="date"], input[type="time"] {
+    color: #C4C4C4;
+}
+
+input[type="date"]:focus::-webkit-calendar-picker-indicator {
+    background: url('../img/icons/date-color-icon.svg') center/80% no-repeat;
+}
+/*END INPUTS*/
+
+
+.text-tag {
+    font-size: 12px;
+    color: #C4C4C4;
+    transition: 0.3s;
+    transition-property: all;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
+.fw-400 {
+    font-weight: 400;
+}
+
+
+/*FOOTER*/
+.fixed-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    padding: 10px 20px;
+    background-color: #ffffff;
+    height: 60px;
+    width: 100%;
+    border: 1px solid #E3E3E3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*END FOOTER*/
+
+
+/*BUTTONS*/
+.button {
+    border: none;
+    border-radius: 50px;
+    padding: 10px 25px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: 0.3s;
+    transition-property: all;
+    margin: 0 5px;
+}
+
+.button-rounded {
+    border: none;
+    border-radius: 50px;
+    padding: 10px;
+    font-weight: 500;
+    font-size: 14px;
+    transition: 0.3s;
+    transition-property: all;
+    margin: 0 5px;
+}
+
+.button-primary {
+    border: 1px solid #0D5B98;
+    background-color: #0D5B98;
+    color: #ffffff;
+}
+
+.button-primary:hover, .button-primary:focus  {
+    border: 1px solid #0b4877;
+    background-color: #0b4877;
+}
+
+.button-secondary {
+    border: 1px solid #00B6E2;
+    background-color: #00B6E2;
+    color: #ffffff;
+}
+
+.button-secondary:hover, .button-secondary:focus  {
+    border: 1px solid #0091b3;
+    background-color: #0091b3;
+}
+
+.button-tertiary {
+    border: 1px solid #009A3C;
+    background-color: #009A3C;
+    color: #ffffff;
+}
+
+.button-tertiary:hover, .button-tertiary:focus  {
+    border: 1px solid #008533;
+    background-color: #008533;
+}
+
+.button-primary-outline {
+    border: 1px solid #0D5B98;
+    background-color: #ffffff;
+    color: #0D5B98;
+}
+
+.button-rounded.button-primary svg path,
+.button-rounded.button-secondary svg path,
+.button-rounded.button-tertiary svg path
+{
+    fill: #ffffff;
+}
+
+.button-rounded.button-primary-outline svg path{
+    fill: #0D5B98;
+}
+
+.button-rounded.button-secondary-outline svg path{
+    fill: #00B6E2;
+}
+
+.button-rounded.button-tertiary-outline svg path{
+    fill: #009A3C;
+}
+
+/*.button-primary-outline:hover {*/
+/*    background-color: rgba(0,0,0,0.25);*/
+/*}*/
+/*END BUTTONS*/
+
+/*TOOLTIP*/
+#tooltip {
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    display: none;
+}
+
+#tooltip[data-show] {
+    display: block;
+}
+
+#arrow,
+#arrow::before {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: inherit;
+}
+
+#arrow {
+    visibility: hidden;
+}
+
+#arrow::before {
+    visibility: visible;
+    content: '';
+    transform: rotate(45deg);
+}
+
+#tooltip[data-popper-placement^='top'] > #arrow {
+    bottom: -4px;
+}
+
+#tooltip[data-popper-placement^='bottom'] > #arrow {
+    top: -4px;
+}
+
+#tooltip[data-popper-placement^='left'] > #arrow {
+    right: -4px;
+}
+
+#tooltip[data-popper-placement^='right'] > #arrow {
+    left: -4px;
+}
+/*END TOOLTIP*/
+
+.view-switcher {
+    cursor: pointer;
+}
+
+.view-switcher.active svg path {
+    fill: #0D5B98;
+    transition: 0.3s;
+    transition-property: all;
+}
