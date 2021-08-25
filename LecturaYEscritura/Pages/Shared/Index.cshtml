@@ -85,7 +85,7 @@
         <script type="text/javascript">
             var webIds = [];
             $(document).ready(function () {
-                /*GetTagListValues();*/
+                GetTagListValues()
             });
             //function GetData() {
             //    $.ajax({
@@ -202,7 +202,7 @@
 
                                                 <div class="col-6 custom-col-4">
                                                     <div class="input">
-                                                        <input type="time" id="time_${webId}" class="form-control-custom" placeholder="hh/mm">
+                                                        <input type="time" id="time_${webId}" class="form-control-custom" placeholder="hh/mm/ss" step="1">
                                                     </div>
                                                 </div>
 
@@ -224,7 +224,7 @@
                                                     <span class="text-tag fw-600">Último Valor:  <span class="fw-400">${Number.isInteger(lastValue.value) ? lastValue.value : 'No Disponible'}</span></span>
                                                 </div>
                                                 <div class="col-12">
-                                                    <span class="text-tag fw-600">Última Fecha: <span class="fw-400">${Number.isInteger(lastValue.date) ? lastValue.date : 'No Disponible'} </span></span>
+                                                    <span class="text-tag fw-600">Última Fecha: <span class="fw-400">${Number.isInteger(lastValue.value) ? lastValue.date : 'No Disponible'} </span></span>
                                                 </div>
                                             </div>
                                         </div>
