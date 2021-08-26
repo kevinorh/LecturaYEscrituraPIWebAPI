@@ -6,7 +6,7 @@
     <div class="col-12 col-md-6">
         <div class="search-bar">
             <div class="input">
-                <input type="text" class="input-with-icon" placeholder="Busca un Tag">
+                <input id="tagFilter" type="text" class="input-with-icon" placeholder="Busca un Tag">
                 <span class="iconify" data-inline="false" data-icon="akar-icons:search" style="font-size: 24px;"></span>
             </div>
         </div>
@@ -37,7 +37,7 @@
 </div>
 
 <div class="tags-main-container col-12 mt-2" id="cards">
-    
+
 </div>
 
 <div class="div-footer">
@@ -64,172 +64,130 @@
         </div>
     </div>
 </div>
-
-
-    @*<div class="text-center">
-        <div class="row align-items-end">
-            <div class="col-12">
-                <h2>Valores</h2>
-            </div>
-        </div>
-        <div class="row align-items-start" id="cards">
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-sm-12 col-md-6 col-lg-4">
-                <button class="btn btn-primary" onclick="SaveData()">Guardar</button>
-            </div>
-        </div>
-    </div>*@
-
-    @section Scripts{
-        <script type="text/javascript">
-            var webIds = [];
-            $(document).ready(function () {
-                GetTagListValues()
-            });
-            //function GetData() {
-            //    $.ajax({
-            //        type: "POST",
-            //        url: "/Home/GetData",
-            //        traditional: true,
-            //        success: (response) => {
-            //            if (response.success) {
-            //                let process = JSON.parse(response.process);
-            //                let data = JSON.parse(JSON.parse(response.data));
-            //                console.log("process: ",process);
-            //                console.log("data: ", data);
-            //                $("#tabla_valores tbody").empty();
-            //                $("#tabla_valores tbody").html(LlenarTabla(data));
-            //            } else {
-            //                let process = JSON.parse(response.process);
-            //                console.log(process);
-            //            }
-            //        }
-            //    });
-            //}
-            //function LlenarTabla(data) {
-            //    var html = "";
-            //    for (var i = 0; i < data.Items.length; i++) {
-            //        if (Number.isInteger(data.Items[i].Value)) {
-            //            html += "<tr>";
-            //            html += "<td>" + data.Items[i].Timestamp + "</td>";
-            //            html += "<td>" + data.Items[i].Value + "</td>";
-            //            html += "</tr>";
-            //        }
-            //    }
-            //    return html;
-            //}
-            //function PostData() {
-            //    $.ajax({
-            //        type: "POST",
-            //        url: "/Home/PostData",
-            //        traditional: true,
-            //        data: {
-            //            "webId": "xdddd",
-            //            "fecha": $('#fecha').val(),
-            //            "hora": $('#hora').val(),
-            //            "valor": $('#valor').val()
-            //        },
-            //        success: (response) => {
-            //            if (response.success) {
-            //                let process = JSON.parse(response.process);
-            //                let data = response.data;
-            //                console.log("process: ",process);
-            //                console.log("data: ",data);
-            //                console.log("--EXITO--");
-            //                GetData();
-            //            } else {
-            //                let process = JSON.parse(response.process);
-            //                console.log(process);
-            //                console.log("--FAIL--");
-            //            }
-            //        }
-            //    });
-            //}
-            //Get Tag List Values
-            function GetTagListValues() {
-                var data = [];
-                var html = "";
-                var values = [];
-                webIds.length = 0;
-                data.length = 0;
-                $('#cards').empty();
-                $.ajax({
-                    type: "POST",
-                    url: "/Home/GetTagListValues",
-                    traditional: true,
-                    success: (response) => {
-                        let process = JSON.parse(response.process);
-                        for (let i = 0; i < process.length; i++) {
-                            console.log(process[i]);
-                        }
-                        if (response.success) {
-                            data = JSON.parse(response.data);
-                            console.log("data", data);
-                            for (let i = 0; i < data.length; i++) {
-                                console.log("--------------------------------");
-                                console.log(data[i].Name);
-                                console.log(data[i].WebId);
-                                webIds.push(data[i].WebId);
-                                values.push(JSON.parse(JSON.parse(data[i].Result)));
-                                html += LoadCards(JSON.parse(JSON.parse(data[i].Result)), data[i].Name, data[i].WebId);
-                                console.log(JSON.parse(JSON.parse(data[i].Result)));
-                            }
-                            $('#cards').html(html);
-                        }
-                    }
-                });
+@section Scripts{
+    <script type="text/javascript">
+        var webIds = [];
+        var data = [];
+        $(document).ready(function () {
+            GetTagListValues()
+        });
+        $("#tagFilter").keyup(function () {
+            //Filter
+            var text = $("#tagFilter").val();
+            var filteredData = [];
+            //Filter is not empty
+            if (text != null || text != "") {
+                for (var i = 0; i < data.length; i++) {
+                    //Text exist in tag names?
+                    if (data[i].Name.includes(text))
+                        filteredData.push(data[i]);
+                }
             }
-            function LoadCards(data, name, webId) {
-                var html = "";
-                var lastValue = GetLastValue(data.Items);
+            //Filter is empty
+            else {
+                filteredData = data;
+            }
+            //Hide all tag containers
+            $(".tag-container").hide();
+            //Show only filtered tag containers
+            for (var i = 0; i < filteredData.length; i++) {
+                var name = "#" + filteredData[i].WebId;
+                $(name).parent().show();
+            }
+        });
+        //Get Tag List Values
+        function GetTagListValues() {
+            var html = "";
+            var values = [];
+            webIds.length = 0;
+            data.length = 0;
+            $('#cards').empty();
+            $.ajax({
+                type: "POST",
+                url: "/Home/GetTagListValues",
+                traditional: true,
+                success: (response) => {
+                    let process = JSON.parse(response.process);
+                    for (let i = 0; i < process.length; i++) {
+                        console.log(process[i]);
+                    }
+                    if (response.success) {
+                        data = JSON.parse(response.data);
+                        console.log("data", data);
+                        for (let i = 0; i < data.length; i++) {
+                            console.log("--------------------------------");
+                            console.log(data[i].Name);
+                            console.log(data[i].WebId);
+                            webIds.push(data[i].WebId);
+                            values.push(JSON.parse(JSON.parse(data[i].Result)));
+                            html += LoadCards(JSON.parse(JSON.parse(data[i].Result)), data[i].Name, data[i].WebId);
+                            console.log(JSON.parse(JSON.parse(data[i].Result)));
+                        }
+                        $('#cards').html(html);
+                    }
+                }
+            });
+        }
+        function LoadCards(data, name, webId) {
+            var html = "";
+            var lastValue = GetLastValue(data.Items);
 
-                html = `<div class="tag-container">
-                            <div class="tag-item active" id="${webId}">
-                                <div class="tag-disposition">
-                                    <div class="tag-item-header">
-                                        <div class="tag-item-title">
-                                            <span class="text-tag fw-600">${name}</span>
+            html = `<div class="tag-container">
+                                <div class="tag-item active" id="${webId}">
+                                    <div class="tag-disposition">
+                                        <div class="tag-item-header">
+                                            <div class="tag-item-title">
+                                                <span class="text-tag fw-600">${name}</span>
+                                            </div>
+                                            <div class="tag-item-separator-list"></div>
+                                            <div class="tag-item-inputs">
+                                                <div class="row d-flex justify-content-center">
+                                                    <div class="col-6 custom-col-4">
+                                                        <div class="input">
+                                                            <input type="number" id="value_${webId}" class="form-control-custom" placeholder="Valor">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-6 custom-col-4">
+                                                        <div class="input">
+                                                            <input type="time" id="time_${webId}" class="form-control-custom" placeholder="hh/mm/ss" step="1">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12 custom-col-4">
+                                                        <div class="input">
+                                                            <input type="date" id="date_${webId}" class="form-control-custom" placeholder="dd/mm/yyyy">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="tag-item-separator-list"></div>
-                                        <div class="tag-item-inputs">
-                                            <div class="row d-flex justify-content-center">
-                                                <div class="col-6 custom-col-4">
-                                                    <div class="input">
-                                                        <input type="number" id="value_${webId}" class="form-control-custom" placeholder="Valor">
+                                        <div class="tag-item-details collapse" id="collapseDetail${webId}">
+                                            <div class="tag-item-details-content">
+                                                <div class="tag-item-details-title">
+                                                    <span class="text-tag fw-600">Datos del Tag</span>
+                                                </div>
+                                                <div class="tag-item-details-body">
+                                                    <div class="col-12">
+                                                        <span class="text-tag fw-600">Último Valor:  <span class="fw-400">${Number.isInteger(lastValue.value) ? lastValue.value : 'No Disponible'}</span></span>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <span class="text-tag fw-600">Última Fecha: <span class="fw-400">${Number.isInteger(lastValue.value) ? lastValue.date : 'No Disponible'} </span></span>
                                                     </div>
                                                 </div>
-
-                                                <div class="col-6 custom-col-4">
-                                                    <div class="input">
-                                                        <input type="time" id="time_${webId}" class="form-control-custom" placeholder="hh/mm/ss" step="1">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12 custom-col-4">
-                                                    <div class="input">
-                                                        <input type="date" id="date_${webId}" class="form-control-custom" placeholder="dd/mm/yyyy">
-                                                    </div>
+                                            </div>
+                                        </div>
+                                        <div class="tag-item-footer-grid">
+                                            <div class="tag-item-dropdown">
+                                                <div class="tag-item-button-dropdown collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetail${webId}" aria-expanded="false" aria-controls="collapseDetail${webId}">
+                                                    <svg width="10" height="10" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M4 6L0.535898 -1.75695e-07L7.4641 4.29987e-07L4 6Z" fill="white" />
+                                                    </svg>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tag-item-details collapse" id="collapseDetail${webId}">
-                                        <div class="tag-item-details-content">
-                                            <div class="tag-item-details-title">
-                                                <span class="text-tag fw-600">Datos del Tag</span>
-                                            </div>
-                                            <div class="tag-item-details-body">
-                                                <div class="col-12">
-                                                    <span class="text-tag fw-600">Último Valor:  <span class="fw-400">${Number.isInteger(lastValue.value) ? lastValue.value : 'No Disponible'}</span></span>
-                                                </div>
-                                                <div class="col-12">
-                                                    <span class="text-tag fw-600">Última Fecha: <span class="fw-400">${Number.isInteger(lastValue.value) ? lastValue.date : 'No Disponible'} </span></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tag-item-footer-grid">
+                                    <div class="tag-item-footer-list">
                                         <div class="tag-item-dropdown">
                                             <div class="tag-item-button-dropdown collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetail${webId}" aria-expanded="false" aria-controls="collapseDetail${webId}">
                                                 <svg width="10" height="10" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -239,128 +197,73 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tag-item-footer-list">
-                                    <div class="tag-item-dropdown">
-                                        <div class="tag-item-button-dropdown collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetail${webId}" aria-expanded="false" aria-controls="collapseDetail${webId}">
-                                            <svg width="10" height="10" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M4 6L0.535898 -1.75695e-07L7.4641 4.29987e-07L4 6Z" fill="white" />
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`
-               
-                //html += "<div class=\"col-sm-12 col-md-6 col-lg-4 mb-2\">";
-                //html += "<div class=\"card\" id=\"" + webId + "\">";
-                //html += "<div class=\"card-header\">" + name + "</div>";
-                //html += "<div class=\"card-body\">";
-                //html += "<div class=\"row\">";
-                //html += "<div class=\"col-12\">";
-                //html += "<span class=\"text-danger\" id=\"danger_" + webId + "\"/></span>";
-                //html += "</div>";
-                //html += "</div>";
-                //html += "<div class=\"row\">";
-                //html += "<div class=\"col-6\">";
-                //html += "<input type=\"date\" id=\"date_" + webId + "\" class=\"form-control\" />";
-                //html += "</div>";
-                //html += "<div class=\"col-6\">";
-                //html += "<input type=\"time\" id=\"time_" + webId + "\" class=\"form-control\" step=\"1\" />";
-                //html += "</div>";
-                //html += "</div>";
-                //html += "<div class=\"row\">";
-                //html += "<div class=\"col-12\">";
-                //html += "<input type=\"number\" id=\"value_" + webId + "\" class=\"form-control\" />";
-                //html += "</div>";
-                //html += "</div>";
-                //html += "<div class=\"row\">";
-                //html += "<div class=\"col-12\">";
-                //if (Number.isInteger(lastValue.value)) {
-                //    html += "<label>Última Fecha:" + lastValue.date + "</label>";
-                //} else {
-                //    html += "<label>Última Fecha: No Disponible</label>";
-                //}
-                //html += "</div>";
-                //html += "</div>";
-                //html += "<div class=\"row\">";
-                //html += "<div class=\"col-12\">";
-                //if (Number.isInteger(lastValue.value)) {
-                //    html += "<label>Último Valor:" + lastValue.value + "</label>";
-                //} else {
-                //    html += "<label>Último Valor: No Disponible</label>";
-                //}
-                //html += "</div>";
-                //html += "</div>";
-                //html += "</div>";
-                //html += "</div>";
-                //html += "</div>";
-
-                return html;
-            }
-            function GetLastValue(data) {
-                var value = data[0].Value;
-                var date = data[0].Timestamp;
-                for (let i = 1; i < data.length; i++) {
-                    if (data[i].Timestamp > date) {
-                        if (Number.isInteger(data[i].Value)) {
-                            value = data[i].Value;
-                            date = data[i].Timestamp;
-                        }
+                            </div>`
+            return html;
+        }
+        function GetLastValue(data) {
+            var value = data[0].Value;
+            var date = data[0].Timestamp;
+            for (let i = 1; i < data.length; i++) {
+                if (data[i].Timestamp > date) {
+                    if (Number.isInteger(data[i].Value)) {
+                        value = data[i].Value;
+                        date = data[i].Timestamp;
                     }
                 }
-                var obj = {
-                    "value": value,
-                    "date": date
-                };
-                return obj
             }
-            //Post Values
-            function SaveData() {
-                for (let i = 0; i < webIds.length; i++) {
-                    PostValue(webIds[i]);
-                }
+            var obj = {
+                "value": value,
+                "date": date
+            };
+            return obj
+        }
+        //Post Values
+        function SaveData() {
+            for (let i = 0; i < webIds.length; i++) {
+                PostValue(webIds[i]);
             }
-            function PostValue(webId) {
-                var dateText = '#date_' + webId;
-                var timeText = '#time_' + webId;
-                var valueText = '#value_' + webId;
-                var date = $(dateText).val();
-                var time = $(timeText).val();
-                var value = $(valueText).val();
-                if (ValidateData(date, time, value, webId))
-                    $.ajax({
-                        type: "POST",
-                        url: "/Home/PostData",
-                        traditional: true,
-                        data: {
-                            "webId": webId,
-                            "fecha": date,
-                            "hora": time,
-                            "valor": value
-                        },
-                        success: (response) => {
-                            let process = JSON.parse(response.process);
-                            console.log("process: ", process);
-                            if (response.success) {
-                                let data = response.data;
-                                console.log("data: ", data);
-                                console.log("--EXITO--");
-                                GetTagListValues();
-                            } else {
-                                console.log(process);
-                                console.log("--FAIL--");
-                            }
+        }
+        function PostValue(webId) {
+            var dateText = '#date_' + webId;
+            var timeText = '#time_' + webId;
+            var valueText = '#value_' + webId;
+            var date = $(dateText).val();
+            var time = $(timeText).val();
+            var value = $(valueText).val();
+            if (ValidateData(date, time, value, webId))
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/PostData",
+                    traditional: true,
+                    data: {
+                        "webId": webId,
+                        "fecha": date,
+                        "hora": time,
+                        "valor": value
+                    },
+                    success: (response) => {
+                        let process = JSON.parse(response.process);
+                        console.log("process: ", process);
+                        if (response.success) {
+                            let data = response.data;
+                            console.log("data: ", data);
+                            console.log("--EXITO--");
+                            GetTagListValues();
+                        } else {
+                            console.log(process);
+                            console.log("--FAIL--");
                         }
-                    });
+                    }
+                });
+        }
+        function ValidateData(date, time, value, webId) {
+            var result = true;
+            if (!(date.length > 0) && !(time.length > 0) && value == "") {
+                result = false;
+                $('#danger_' + webId).empty();
+                $('#danger_' + webId).text("No se envió la información, todos los campos deben estar completos")
             }
-            function ValidateData(date, time, value, webId) {
-                var result = true;
-                if (!(date.length > 0) && !(time.length > 0) && value == "") {
-                    result = false;
-                    $('#danger_' + webId).empty();
-                    $('#danger_' + webId).text("No se envió la información, todos los campos deben estar completos")
-                }
-                return result;
-            }
-        </script>
-    }
+            return result;
+        }
+    </script>
+}
