@@ -1,43 +1,59 @@
 ﻿@page
 @model IndexModel
 
+<div class="card text-center">
+    <div class="card-header">
+        <ul class="nav nav-tabs card-header-tabs" id="listItems">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" id="nav_control" href="#nav_control">Control de mallas y densidades</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" id="nav_leyes" href="#nav_leyes">Leyes de estaño</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div class="row mb-2 justify-content-center">
+            <div class="col-12 col-md-6">
+                <div class="search-bar">
+                    <div class="input">
+                        <input id="tagFilter" type="text" class="input-with-icon" placeholder="Busca un Tag">
+                        <span class="iconify" data-inline="false" data-icon="akar-icons:search" style="font-size: 24px;"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-2 mb-2">
+            <div class="col-12">
+                <div class="search-bar d-flex justify-content-between">
+                    <div>
+                        <span id="list-view" class="view-switcher">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 8C4.55228 8 5 7.55228 5 7C5 6.44772 4.55228 6 4 6C3.44772 6 3 6.44772 3 7C3 7.55228 3.44772 8 4 8Z" fill="#C4C4C4" />
+                                <path d="M4 13C4.55228 13 5 12.5523 5 12C5 11.4477 4.55228 11 4 11C3.44772 11 3 11.4477 3 12C3 12.5523 3.44772 13 4 13Z" fill="#C4C4C4" />
+                                <path d="M4 18C4.55228 18 5 17.5523 5 17C5 16.4477 4.55228 16 4 16C3.44772 16 3 16.4477 3 17C3 17.5523 3.44772 18 4 18Z" fill="#C4C4C4" />
+                                <path d="M20.06 11H7.94C7.42085 11 7 11.4209 7 11.94V12.06C7 12.5791 7.42085 13 7.94 13H20.06C20.5791 13 21 12.5791 21 12.06V11.94C21 11.4209 20.5791 11 20.06 11Z" fill="#C4C4C4" />
+                                <path d="M20.06 16H7.94C7.42085 16 7 16.4209 7 16.94V17.06C7 17.5791 7.42085 18 7.94 18H20.06C20.5791 18 21 17.5791 21 17.06V16.94C21 16.4209 20.5791 16 20.06 16Z" fill="#C4C4C4" />
+                                <path d="M20.06 6H7.94C7.42085 6 7 6.42085 7 6.94V7.06C7 7.57915 7.42085 8 7.94 8H20.06C20.5791 8 21 7.57915 21 7.06V6.94C21 6.42085 20.5791 6 20.06 6Z" fill="#C4C4C4" />
+                            </svg>
+                        </span>
+                        <span class="text-tag">|</span>
+                        <span id="grid-view" class="view-switcher">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 2.5C1 2.10218 1.15804 1.72064 1.43934 1.43934C1.72064 1.15804 2.10218 1 2.5 1H5.5C5.89782 1 6.27936 1.15804 6.56066 1.43934C6.84196 1.72064 7 2.10218 7 2.5V5.5C7 5.89782 6.84196 6.27936 6.56066 6.56066C6.27936 6.84196 5.89782 7 5.5 7H2.5C2.10218 7 1.72064 6.84196 1.43934 6.56066C1.15804 6.27936 1 5.89782 1 5.5V2.5ZM9 2.5C9 2.10218 9.15804 1.72064 9.43934 1.43934C9.72064 1.15804 10.1022 1 10.5 1H13.5C13.8978 1 14.2794 1.15804 14.5607 1.43934C14.842 1.72064 15 2.10218 15 2.5V5.5C15 5.89782 14.842 6.27936 14.5607 6.56066C14.2794 6.84196 13.8978 7 13.5 7H10.5C10.1022 7 9.72064 6.84196 9.43934 6.56066C9.15804 6.27936 9 5.89782 9 5.5V2.5ZM1 10.5C1 10.1022 1.15804 9.72064 1.43934 9.43934C1.72064 9.15804 2.10218 9 2.5 9H5.5C5.89782 9 6.27936 9.15804 6.56066 9.43934C6.84196 9.72064 7 10.1022 7 10.5V13.5C7 13.8978 6.84196 14.2794 6.56066 14.5607C6.27936 14.842 5.89782 15 5.5 15H2.5C2.10218 15 1.72064 14.842 1.43934 14.5607C1.15804 14.2794 1 13.8978 1 13.5V10.5ZM9 10.5C9 10.1022 9.15804 9.72064 9.43934 9.43934C9.72064 9.15804 10.1022 9 10.5 9H13.5C13.8978 9 14.2794 9.15804 14.5607 9.43934C14.842 9.72064 15 10.1022 15 10.5V13.5C15 13.8978 14.842 14.2794 14.5607 14.5607C14.2794 14.842 13.8978 15 13.5 15H10.5C10.1022 15 9.72064 14.842 9.43934 14.5607C9.15804 14.2794 9 13.8978 9 13.5V10.5Z" fill="#C4C4C4" />
+                            </svg>
+                        </span>
+                    </div>
 
-<div class="row d-flex justify-content-center">
-    <div class="col-12 col-md-6">
-        <div class="search-bar">
-            <div class="input">
-                <input id="tagFilter" type="text" class="input-with-icon" placeholder="Busca un Tag">
-                <span class="iconify" data-inline="false" data-icon="akar-icons:search" style="font-size: 24px;"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="tags-main-container col-12 mt-2" id="cards">
+
             </div>
         </div>
     </div>
-    <div class="col-12">
-        <div class="search-bar d-flex justify-content-between">
-            <div>
-                <span id="list-view" class="view-switcher">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4 8C4.55228 8 5 7.55228 5 7C5 6.44772 4.55228 6 4 6C3.44772 6 3 6.44772 3 7C3 7.55228 3.44772 8 4 8Z" fill="#C4C4C4" />
-                        <path d="M4 13C4.55228 13 5 12.5523 5 12C5 11.4477 4.55228 11 4 11C3.44772 11 3 11.4477 3 12C3 12.5523 3.44772 13 4 13Z" fill="#C4C4C4" />
-                        <path d="M4 18C4.55228 18 5 17.5523 5 17C5 16.4477 4.55228 16 4 16C3.44772 16 3 16.4477 3 17C3 17.5523 3.44772 18 4 18Z" fill="#C4C4C4" />
-                        <path d="M20.06 11H7.94C7.42085 11 7 11.4209 7 11.94V12.06C7 12.5791 7.42085 13 7.94 13H20.06C20.5791 13 21 12.5791 21 12.06V11.94C21 11.4209 20.5791 11 20.06 11Z" fill="#C4C4C4" />
-                        <path d="M20.06 16H7.94C7.42085 16 7 16.4209 7 16.94V17.06C7 17.5791 7.42085 18 7.94 18H20.06C20.5791 18 21 17.5791 21 17.06V16.94C21 16.4209 20.5791 16 20.06 16Z" fill="#C4C4C4" />
-                        <path d="M20.06 6H7.94C7.42085 6 7 6.42085 7 6.94V7.06C7 7.57915 7.42085 8 7.94 8H20.06C20.5791 8 21 7.57915 21 7.06V6.94C21 6.42085 20.5791 6 20.06 6Z" fill="#C4C4C4" />
-                    </svg>
-                </span>
-                <span class="text-tag">|</span>
-                <span id="grid-view" class="view-switcher">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M1 2.5C1 2.10218 1.15804 1.72064 1.43934 1.43934C1.72064 1.15804 2.10218 1 2.5 1H5.5C5.89782 1 6.27936 1.15804 6.56066 1.43934C6.84196 1.72064 7 2.10218 7 2.5V5.5C7 5.89782 6.84196 6.27936 6.56066 6.56066C6.27936 6.84196 5.89782 7 5.5 7H2.5C2.10218 7 1.72064 6.84196 1.43934 6.56066C1.15804 6.27936 1 5.89782 1 5.5V2.5ZM9 2.5C9 2.10218 9.15804 1.72064 9.43934 1.43934C9.72064 1.15804 10.1022 1 10.5 1H13.5C13.8978 1 14.2794 1.15804 14.5607 1.43934C14.842 1.72064 15 2.10218 15 2.5V5.5C15 5.89782 14.842 6.27936 14.5607 6.56066C14.2794 6.84196 13.8978 7 13.5 7H10.5C10.1022 7 9.72064 6.84196 9.43934 6.56066C9.15804 6.27936 9 5.89782 9 5.5V2.5ZM1 10.5C1 10.1022 1.15804 9.72064 1.43934 9.43934C1.72064 9.15804 2.10218 9 2.5 9H5.5C5.89782 9 6.27936 9.15804 6.56066 9.43934C6.84196 9.72064 7 10.1022 7 10.5V13.5C7 13.8978 6.84196 14.2794 6.56066 14.5607C6.27936 14.842 5.89782 15 5.5 15H2.5C2.10218 15 1.72064 14.842 1.43934 14.5607C1.15804 14.2794 1 13.8978 1 13.5V10.5ZM9 10.5C9 10.1022 9.15804 9.72064 9.43934 9.43934C9.72064 9.15804 10.1022 9 10.5 9H13.5C13.8978 9 14.2794 9.15804 14.5607 9.43934C14.842 9.72064 15 10.1022 15 10.5V13.5C15 13.8978 14.842 14.2794 14.5607 14.5607C14.2794 14.842 13.8978 15 13.5 15H10.5C10.1022 15 9.72064 14.842 9.43934 14.5607C9.15804 14.2794 9 13.8978 9 13.5V10.5Z" fill="#C4C4C4" />
-                    </svg>
-                </span>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<div class="tags-main-container col-12 mt-2" id="cards">
-
 </div>
 
 <div class="div-footer">
@@ -68,8 +84,24 @@
     <script type="text/javascript">
         var webIds = [];
         var data = [];
+        var area = "";
         $(document).ready(function () {
-            GetTagListValues()
+            GetTagListValues();            
+        });
+
+        $("#nav_control").on('click', function (e) {
+            $(this).tab('show');
+            area = "CMD";
+            $(".area-CMD").show();
+            $(".area-LE").hide();
+            $("#tagFilter").val("");
+        });
+        $("#nav_leyes").on('click', function (e) {
+            $(this).tab('show');
+            area = "LE";
+            $(".area-CMD").hide();
+            $(".area-LE").show();
+            $("#tagFilter").val("");
         });
         $("#tagFilter").keyup(function () {
             //Filter
@@ -79,7 +111,7 @@
             if (text != null || text != "") {
                 for (var i = 0; i < data.length; i++) {
                     //Text exist in tag names?
-                    if (data[i].Name.includes(text))
+                    if (data[i].Name.toLowerCase().includes(text.toLowerCase()) && data[i].Area == area)
                         filteredData.push(data[i]);
                 }
             }
@@ -95,6 +127,32 @@
                 $(name).parent().show();
             }
         });
+
+        //Enable Tag to Write
+        function ChangeActive(webId) {
+            if ($('#' + webId).hasClass('active')) {
+                //Visual
+                $('#' + webId).removeClass('active');
+                //Disable Inputs
+                let dateText = '#date_' + webId;
+                let timeText = '#time_' + webId;
+                let valueText = '#value_' + webId;
+                $(dateText).attr('disabled', true);
+                $(timeText).attr('disabled', true);
+                $(valueText).attr('disabled', true);
+            }
+            else {
+                //Visual
+                $('#' + webId).addClass('active');
+                //Enable Inputs
+                let dateText = '#date_' + webId;
+                let timeText = '#time_' + webId;
+                let valueText = '#value_' + webId;
+                $(dateText).attr('disabled', false);
+                $(timeText).attr('disabled', false);
+                $(valueText).attr('disabled', false);
+            }
+        }
         //Get Tag List Values
         function GetTagListValues() {
             var html = "";
@@ -115,97 +173,139 @@
                         data = JSON.parse(response.data);
                         console.log("data", data);
                         for (let i = 0; i < data.length; i++) {
-                            console.log("--------------------------------");
-                            console.log(data[i].Name);
-                            console.log(data[i].WebId);
+                            //console.log("--------------------------------");
+                            //console.log(data[i].Name);
+                            //console.log(data[i].WebId);
                             webIds.push(data[i].WebId);
                             values.push(JSON.parse(JSON.parse(data[i].Result)));
-                            html += LoadCards(JSON.parse(JSON.parse(data[i].Result)), data[i].Name, data[i].WebId);
-                            console.log(JSON.parse(JSON.parse(data[i].Result)));
+                            html += LoadCards(JSON.parse(JSON.parse(data[i].Result)), data[i].Name, data[i].WebId, data[i].Unit, data[i].MinValue, data[i].MaxValue, data[i].Type, data[i].Area);
+                            //console.log(JSON.parse(JSON.parse(data[i].Result)));
                         }
                         $('#cards').html(html);
+                        $("#nav_control").click();
                     }
                 }
             });
         }
-        function LoadCards(data, name, webId) {
+        //Get Tag Data
+        function GetTagData(webId) {
+            console.log("--GET TAG DATA--");
+            console.log("WebID", webId);
+            $.ajax({
+                type: "POST",
+                url: "/Home/GetTagData",
+                traditional: true,
+                data: {
+                    "webId": webId
+                },
+                success: (response) => {
+                    let process = JSON.parse(response.process);
+                    for (let i = 0; i < process.length; i++) {
+                        console.log(process[i]);
+                    }
+                    if (response.success) {
+                        //console.log("--EXITO GET TAG DATA--");
+                        rData = JSON.parse(response.data);
+                        //console.log("Data: ", JSON.parse(JSON.parse(rData.Result)).Items);
+                        for (let i = 0; i < data.length; i++) {
+                            if (data[i].WebId == webId) {
+                                data[i].Result = rData.Result;
+                                //console.log("Data Updated: ", JSON.parse(JSON.parse(data[i].Result)).Items);
+                                let lastValue = GetLastValue(JSON.parse(JSON.parse(data[i].Result)).Items);
+                                ReplaceCardData(webId, lastValue.value, lastValue.date, data[i].Unit)
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        function LoadCards(data, name, webId, unit, minVal, maxVal, type, area) {
             var html = "";
             var lastValue = GetLastValue(data.Items);
-
-            html = `<div class="tag-container">
-                                <div class="tag-item active" id="${webId}">
-                                    <div class="tag-disposition">
-                                        <div class="tag-item-header">
-                                            <div class="tag-item-title">
-                                                <span class="text-tag fw-600">${name}</span>
-                                            </div>
-                                            <div class="tag-item-separator-list"></div>
-                                            <div class="tag-item-inputs">
-                                                <div class="row d-flex justify-content-center">
-                                                    <div class="col-6 custom-col-4">
-                                                        <div class="input">
-                                                            <input type="number" id="value_${webId}" class="form-control-custom" placeholder="Valor">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-6 custom-col-4">
-                                                        <div class="input">
-                                                            <input type="time" id="time_${webId}" class="form-control-custom" placeholder="hh/mm/ss" step="1">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-12 custom-col-4">
-                                                        <div class="input">
-                                                            <input type="date" id="date_${webId}" class="form-control-custom" placeholder="dd/mm/yyyy">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tag-item-details collapse" id="collapseDetail${webId}">
-                                            <div class="tag-item-details-content">
-                                                <div class="tag-item-details-title">
-                                                    <span class="text-tag fw-600">Datos del Tag</span>
-                                                </div>
-                                                <div class="tag-item-details-body">
-                                                    <div class="col-12">
-                                                        <span class="text-tag fw-600">Último Valor:  <span class="fw-400">${Number.isInteger(lastValue.value) ? lastValue.value : 'No Disponible'}</span></span>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <span class="text-tag fw-600">Última Fecha: <span class="fw-400">${Number.isInteger(lastValue.value) ? lastValue.date : 'No Disponible'} </span></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tag-item-footer-grid">
-                                            <div class="tag-item-dropdown">
-                                                <div class="tag-item-button-dropdown collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetail${webId}" aria-expanded="false" aria-controls="collapseDetail${webId}">
-                                                    <svg width="10" height="10" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                        <path d="M4 6L0.535898 -1.75695e-07L7.4641 4.29987e-07L4 6Z" fill="white" />
-                                                    </svg>
-                                                </div>
-                                            </div>
-                                        </div>
+            html = `<div class="tag-container area-${area}">
+                        <div class="tag-item" id="${webId}">
+                            <div class="tag-disposition">
+                                <div class="tag-item-header">
+                                    <div class="tag-item-title" onclick="ChangeActive('${webId}')">
+                                        <span class="text-tag fw-600">${name}</span>
                                     </div>
-                                    <div class="tag-item-footer-list">
-                                        <div class="tag-item-dropdown">
-                                            <div class="tag-item-button-dropdown collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetail${webId}" aria-expanded="false" aria-controls="collapseDetail${webId}">
-                                                <svg width="10" height="10" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M4 6L0.535898 -1.75695e-07L7.4641 4.29987e-07L4 6Z" fill="white" />
-                                                </svg>
+                                    <div class="tag-item-separator-list"></div>
+                                    <div class="tag-item-inputs">
+                                        <div class="row d-flex justify-content-center">
+                                            <div class="col-6 custom-col-4">
+                                                <div class="input">                                                    
+                                                    <input type="number" id="value_${webId}" min=${minVal} max=${maxVal} dataType="${type}" class="form-control-custom" placeholder="Valor" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 custom-col-4">
+                                                <div class="input">
+                                                    <input type="time" id="time_${webId}" class="form-control-custom" placeholder="hh/mm/ss" step="1" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 custom-col-4">
+                                                <div class="input">
+                                                    <input type="date" id="date_${webId}" class="form-control-custom" placeholder="dd/mm/yyyy" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 custom-col-4">
+                                                <span id="danger_${webId}" class="text-danger">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>`
+                                <div class="tag-item-details collapse" id="collapseDetail${webId}">
+                                    <div class="tag-item-details-content">
+                                        <div class="tag-item-details-title">
+                                            <span class="text-tag fw-600">Datos del Tag</span>
+                                        </div>
+                                        <div class="tag-item-details-body">
+                                            <div class="col-12" id="last_value_${webId}">
+                                                <span class="text-tag fw-600">Último Valor:  <span class="fw-400">${typeof lastValue.value == 'number'? lastValue.value + " " + unit : 'No Disponible'}</span></span>
+                                            </div>
+                                            <div class="col-12" id="last_time_${webId}">
+                                                <span class="text-tag fw-600">Última Fecha: <span class="fw-400">${typeof lastValue.value == 'number' ? lastValue.date : 'No Disponible'} </span></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tag-item-footer-grid">
+                                    <div class="tag-item-dropdown">
+                                        <div class="tag-item-button-dropdown collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetail${webId}" aria-expanded="false" aria-controls="collapseDetail${webId}">
+                                            <svg width="10" height="10" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M4 6L0.535898 -1.75695e-07L7.4641 4.29987e-07L4 6Z" fill="white" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tag-item-footer-list">
+                                <div class="tag-item-dropdown">
+                                    <div class="tag-item-button-dropdown collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDetail${webId}" aria-expanded="false" aria-controls="collapseDetail${webId}">
+                                        <svg width="10" height="10" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M4 6L0.535898 -1.75695e-07L7.4641 4.29987e-07L4 6Z" fill="white" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>`
             return html;
         }
         function GetLastValue(data) {
-            var value = data[0].Value;
-            var date = data[0].Timestamp;
+            let value = data[0].Value;
+            let date = data[0].Timestamp;
+
+            //console.log("First Value: ", value);
+            //console.log("First Date: ", date);
+
             for (let i = 1; i < data.length; i++) {
+                //console.log("----------------------------");
+                //console.log("Date Validation (data[i].Timestamp > First Date): ", data[i].Timestamp > date);
                 if (data[i].Timestamp > date) {
-                    if (Number.isInteger(data[i].Value)) {
+                    //console.log("Type Validation (typeof data[i].Value == 'number'): ", typeof data[i].Value == 'number');
+                    if (typeof data[i].Value == 'number') {
+                        //console.log("New Value: ", data[i].Value);
+                        //console.log("New Date: ", data[i].Timestamp);
                         value = data[i].Value;
                         date = data[i].Timestamp;
                     }
@@ -224,46 +324,98 @@
             }
         }
         function PostValue(webId) {
-            var dateText = '#date_' + webId;
-            var timeText = '#time_' + webId;
-            var valueText = '#value_' + webId;
-            var date = $(dateText).val();
-            var time = $(timeText).val();
-            var value = $(valueText).val();
-            if (ValidateData(date, time, value, webId))
-                $.ajax({
-                    type: "POST",
-                    url: "/Home/PostData",
-                    traditional: true,
-                    data: {
-                        "webId": webId,
-                        "fecha": date,
-                        "hora": time,
-                        "valor": value
-                    },
-                    success: (response) => {
-                        let process = JSON.parse(response.process);
-                        console.log("process: ", process);
-                        if (response.success) {
-                            let data = response.data;
-                            console.log("data: ", data);
-                            console.log("--EXITO--");
-                            GetTagListValues();
-                        } else {
-                            console.log(process);
-                            console.log("--FAIL--");
+            $('#danger_' + webId).empty();
+            if ($('#' + webId).hasClass('active')) {
+                let dateText = '#date_' + webId;
+                let timeText = '#time_' + webId;
+                let valueText = '#value_' + webId;
+                let date = $(dateText).val();
+                let time = $(timeText).val();
+                let value = $(valueText).val();
+                if (ValidateData(date, time, value, webId)) {
+                    console.log("VALIDO");
+                    console.log("WebId: ", webId);
+                    $.ajax({
+                        type: "POST",
+                        url: "/Home/PostData",
+                        traditional: true,
+                        data: {
+                            "webId": webId,
+                            "fecha": date,
+                            "hora": time,
+                            "valor": value
+                        },
+                        success: (response) => {
+                            let process = JSON.parse(response.process);
+                            if (response.success) {
+                                console.log("--EXITO--");
+                                GetTagData(webId);
+                                $(dateText).val("");
+                                $(timeText).val("");
+                                $(valueText).val("");
+                                //LoadCards(data, name, webId, unit, minVal, maxVal, type, area);
+                            } else {
+                                console.log(process);
+                                console.log("--FAIL--");
+                            }
                         }
-                    }
-                });
-        }
-        function ValidateData(date, time, value, webId) {
-            var result = true;
-            if (!(date.length > 0) && !(time.length > 0) && value == "") {
-                result = false;
-                $('#danger_' + webId).empty();
-                $('#danger_' + webId).text("No se envió la información, todos los campos deben estar completos")
+                    });
+                }
+                else {
+                    console.log("NO VALIDO");
+                    console.log("WebId: ", webId);
+                }
             }
-            return result;
         }
+        function ReplaceCardData(webId, lastValue, lastTime, unit) {
+            var lastValueId = "#last_value_" + webId
+            var lastTimeId = "#last_time_" + webId
+            $(lastValueId).empty();
+            $(lastValueId).html(`<span class="text-tag fw-600">Último Valor:  <span class="fw-400">${typeof lastValue == 'number' ? lastValue + " " + unit : 'No Disponible'}</span></span>`);
+            $(lastTimeId).empty();
+            $(lastTimeId).html(`<span class="text-tag fw-600">Última Fecha: <span class="fw-400">${typeof lastValue == 'number' ? lastTime : 'No Disponible'} </span></span>`);
+        }
+        //Validation
+        function ValidateData(date, time, value, webId) {
+            let id = '#value_' + webId;
+            let dataType = $(id).attr("dataType")
+            let max = parseInt($(id).attr('max'));
+            let min = parseInt($(id).attr('min'));
+
+            if (date == null || time == null || value == null || date.length <= 0 || time.length <= 0 || value == "") {
+                $('#danger_' + webId).text("Todos los campos deben estar completos");
+                if (value == null || value == "") {
+                    //$(id).css('border-color', '#FF0000');
+                    $(id).focus();
+                }
+                else if (date == null || date.length <= 0) {
+                    let dateText = '#date_' + webId;
+                    //$(dateText).css('border-color', '#FF0000');
+                    $(dateText).focus();
+                }
+                else if (time == null || time.length <= 0) {
+                    let timeText = '#time_' + webId;
+                    //$(timeText).css('border-color', '#FF0000');
+                    $(timeText).focus();
+                }
+                return false;
+            }
+            else {
+                if (value < min || value > max) {
+                    $('#danger_' + webId).text("El valor debe estar entre " + min + " y " + max);
+                    //$(id).css('border-color', '#FF0000');
+                    $(id).focus();
+                    return false;
+                }
+                //Interger Validation
+                if (dataType === 'int' && !Number.isInteger(value)) {
+                    $('#danger_' + webId).text("El valor debe ser entero");
+                    //$(id).css('border-color', '#FF0000');
+                    $(id).focus();
+                    return false;
+                }
+                return true;
+            }
+        }        
     </script>
 }

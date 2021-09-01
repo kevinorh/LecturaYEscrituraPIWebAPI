@@ -49,8 +49,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100px;
-    max-width: 100px;
+    width: 200px;
+    max-width: 200px;
 }
 
 .tag-item-title span {
