@@ -27,6 +27,12 @@
             <div class="col-12">
                 <div class="search-bar d-flex justify-content-between">
                     <div>
+                        <span id="grid-view" class="view-switcher">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1 2.5C1 2.10218 1.15804 1.72064 1.43934 1.43934C1.72064 1.15804 2.10218 1 2.5 1H5.5C5.89782 1 6.27936 1.15804 6.56066 1.43934C6.84196 1.72064 7 2.10218 7 2.5V5.5C7 5.89782 6.84196 6.27936 6.56066 6.56066C6.27936 6.84196 5.89782 7 5.5 7H2.5C2.10218 7 1.72064 6.84196 1.43934 6.56066C1.15804 6.27936 1 5.89782 1 5.5V2.5ZM9 2.5C9 2.10218 9.15804 1.72064 9.43934 1.43934C9.72064 1.15804 10.1022 1 10.5 1H13.5C13.8978 1 14.2794 1.15804 14.5607 1.43934C14.842 1.72064 15 2.10218 15 2.5V5.5C15 5.89782 14.842 6.27936 14.5607 6.56066C14.2794 6.84196 13.8978 7 13.5 7H10.5C10.1022 7 9.72064 6.84196 9.43934 6.56066C9.15804 6.27936 9 5.89782 9 5.5V2.5ZM1 10.5C1 10.1022 1.15804 9.72064 1.43934 9.43934C1.72064 9.15804 2.10218 9 2.5 9H5.5C5.89782 9 6.27936 9.15804 6.56066 9.43934C6.84196 9.72064 7 10.1022 7 10.5V13.5C7 13.8978 6.84196 14.2794 6.56066 14.5607C6.27936 14.842 5.89782 15 5.5 15H2.5C2.10218 15 1.72064 14.842 1.43934 14.5607C1.15804 14.2794 1 13.8978 1 13.5V10.5ZM9 10.5C9 10.1022 9.15804 9.72064 9.43934 9.43934C9.72064 9.15804 10.1022 9 10.5 9H13.5C13.8978 9 14.2794 9.15804 14.5607 9.43934C14.842 9.72064 15 10.1022 15 10.5V13.5C15 13.8978 14.842 14.2794 14.5607 14.5607C14.2794 14.842 13.8978 15 13.5 15H10.5C10.1022 15 9.72064 14.842 9.43934 14.5607C9.15804 14.2794 9 13.8978 9 13.5V10.5Z" fill="#C4C4C4" />
+                            </svg>
+                        </span>
+                        <span class="text-tag">|</span>
                         <span id="list-view" class="view-switcher">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M4 8C4.55228 8 5 7.55228 5 7C5 6.44772 4.55228 6 4 6C3.44772 6 3 6.44772 3 7C3 7.55228 3.44772 8 4 8Z" fill="#C4C4C4" />
@@ -35,12 +41,6 @@
                                 <path d="M20.06 11H7.94C7.42085 11 7 11.4209 7 11.94V12.06C7 12.5791 7.42085 13 7.94 13H20.06C20.5791 13 21 12.5791 21 12.06V11.94C21 11.4209 20.5791 11 20.06 11Z" fill="#C4C4C4" />
                                 <path d="M20.06 16H7.94C7.42085 16 7 16.4209 7 16.94V17.06C7 17.5791 7.42085 18 7.94 18H20.06C20.5791 18 21 17.5791 21 17.06V16.94C21 16.4209 20.5791 16 20.06 16Z" fill="#C4C4C4" />
                                 <path d="M20.06 6H7.94C7.42085 6 7 6.42085 7 6.94V7.06C7 7.57915 7.42085 8 7.94 8H20.06C20.5791 8 21 7.57915 21 7.06V6.94C21 6.42085 20.5791 6 20.06 6Z" fill="#C4C4C4" />
-                            </svg>
-                        </span>
-                        <span class="text-tag">|</span>
-                        <span id="grid-view" class="view-switcher">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1 2.5C1 2.10218 1.15804 1.72064 1.43934 1.43934C1.72064 1.15804 2.10218 1 2.5 1H5.5C5.89782 1 6.27936 1.15804 6.56066 1.43934C6.84196 1.72064 7 2.10218 7 2.5V5.5C7 5.89782 6.84196 6.27936 6.56066 6.56066C6.27936 6.84196 5.89782 7 5.5 7H2.5C2.10218 7 1.72064 6.84196 1.43934 6.56066C1.15804 6.27936 1 5.89782 1 5.5V2.5ZM9 2.5C9 2.10218 9.15804 1.72064 9.43934 1.43934C9.72064 1.15804 10.1022 1 10.5 1H13.5C13.8978 1 14.2794 1.15804 14.5607 1.43934C14.842 1.72064 15 2.10218 15 2.5V5.5C15 5.89782 14.842 6.27936 14.5607 6.56066C14.2794 6.84196 13.8978 7 13.5 7H10.5C10.1022 7 9.72064 6.84196 9.43934 6.56066C9.15804 6.27936 9 5.89782 9 5.5V2.5ZM1 10.5C1 10.1022 1.15804 9.72064 1.43934 9.43934C1.72064 9.15804 2.10218 9 2.5 9H5.5C5.89782 9 6.27936 9.15804 6.56066 9.43934C6.84196 9.72064 7 10.1022 7 10.5V13.5C7 13.8978 6.84196 14.2794 6.56066 14.5607C6.27936 14.842 5.89782 15 5.5 15H2.5C2.10218 15 1.72064 14.842 1.43934 14.5607C1.15804 14.2794 1 13.8978 1 13.5V10.5ZM9 10.5C9 10.1022 9.15804 9.72064 9.43934 9.43934C9.72064 9.15804 10.1022 9 10.5 9H13.5C13.8978 9 14.2794 9.15804 14.5607 9.43934C14.842 9.72064 15 10.1022 15 10.5V13.5C15 13.8978 14.842 14.2794 14.5607 14.5607C14.2794 14.842 13.8978 15 13.5 15H10.5C10.1022 15 9.72064 14.842 9.43934 14.5607C9.15804 14.2794 9 13.8978 9 13.5V10.5Z" fill="#C4C4C4" />
                             </svg>
                         </span>
                     </div>
@@ -128,29 +128,35 @@
             }
         });
 
-        //Enable Tag to Write
+        //Enable/Disable Tag to Write
         function ChangeActive(webId) {
-            if ($('#' + webId).hasClass('active')) {
+            let dateText = '#date_' + webId;
+            let timeText = '#time_' + webId;
+            let valueText = '#value_' + webId;
+
+            let value = $(valueText).val();
+            let time = $(timeText).val();
+            let date = $(dateText).val();
+
+            if ($('#' + webId).hasClass('active') && (value == "" && date == "" && time == "")) {
                 //Visual
                 $('#' + webId).removeClass('active');
                 //Disable Inputs
-                let dateText = '#date_' + webId;
-                let timeText = '#time_' + webId;
-                let valueText = '#value_' + webId;
                 $(dateText).attr('disabled', true);
                 $(timeText).attr('disabled', true);
                 $(valueText).attr('disabled', true);
             }
             else {
-                //Visual
-                $('#' + webId).addClass('active');
-                //Enable Inputs
-                let dateText = '#date_' + webId;
-                let timeText = '#time_' + webId;
-                let valueText = '#value_' + webId;
-                $(dateText).attr('disabled', false);
-                $(timeText).attr('disabled', false);
-                $(valueText).attr('disabled', false);
+                if (value == "" && date == "" && time == "") {
+                    //Visual
+                    $('#' + webId).addClass('active');
+                    //Enable Inputs
+                    $(dateText).attr('disabled', false);
+                    $(timeText).attr('disabled', false);
+                    $(valueText).attr('disabled', false);
+                    //Focus Value
+                    $(valueText).focus();
+                }
             }
         }
         //Get Tag List Values
@@ -178,7 +184,7 @@
                             //console.log(data[i].WebId);
                             webIds.push(data[i].WebId);
                             values.push(JSON.parse(JSON.parse(data[i].Result)));
-                            html += LoadCards(JSON.parse(JSON.parse(data[i].Result)), data[i].Name, data[i].WebId, data[i].Unit, data[i].MinValue, data[i].MaxValue, data[i].Type, data[i].Area);
+                            html += LoadCards(JSON.parse(JSON.parse(data[i].Result)), data[i].Name, data[i].WebId, data[i].Unit, data[i].MinValue, data[i].MaxValue, data[i].Type, data[i].Area, data[i].Descriptor);
                             //console.log(JSON.parse(JSON.parse(data[i].Result)));
                         }
                         $('#cards').html(html);
@@ -219,14 +225,14 @@
                 }
             });
         }
-        function LoadCards(data, name, webId, unit, minVal, maxVal, type, area) {
+        function LoadCards(data, name, webId, unit, minVal, maxVal, type, area, descriptor) {
             var html = "";
             var lastValue = GetLastValue(data.Items);
             html = `<div class="tag-container area-${area}">
-                        <div class="tag-item" id="${webId}">
+                        <div class="tag-item" id="${webId}" onclick="ChangeActive('${webId}')">
                             <div class="tag-disposition">
                                 <div class="tag-item-header">
-                                    <div class="tag-item-title" onclick="ChangeActive('${webId}')">
+                                    <div class="tag-item-title">
                                         <span class="text-tag fw-600">${name}</span>
                                     </div>
                                     <div class="tag-item-separator-list"></div>
@@ -259,6 +265,9 @@
                                             <span class="text-tag fw-600">Datos del Tag</span>
                                         </div>
                                         <div class="tag-item-details-body">
+                                            <div class="col-12" id="descriptor_${webId}">
+                                                <span class="text-tag fw-400">${descriptor}</span>
+                                            </div>
                                             <div class="col-12" id="last_value_${webId}">
                                                 <span class="text-tag fw-600">Último Valor:  <span class="fw-400">${typeof lastValue.value == 'number'? lastValue.value + " " + unit : 'No Disponible'}</span></span>
                                             </div>
@@ -382,7 +391,7 @@
             let max = parseInt($(id).attr('max'));
             let min = parseInt($(id).attr('min'));
 
-            if (date == null || time == null || value == null || date.length <= 0 || time.length <= 0 || value == "") {
+            if (date == null || time == null || value == null || date.length <= 0 || time.length <= 0 || value == ""){
                 $('#danger_' + webId).text("Todos los campos deben estar completos");
                 if (value == null || value == "") {
                     //$(id).css('border-color', '#FF0000');

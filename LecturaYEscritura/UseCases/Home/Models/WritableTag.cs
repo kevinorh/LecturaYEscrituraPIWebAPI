@@ -14,6 +14,7 @@ namespace LecturaYEscritura.UseCases.Home.Models
         public double MinValue { get; set; }
         public double MaxValue { get; set; }
         public string Type { get; set; }
+        public string Descriptor { get; set; }
         public Area Area { get; set; }
     }
 }
