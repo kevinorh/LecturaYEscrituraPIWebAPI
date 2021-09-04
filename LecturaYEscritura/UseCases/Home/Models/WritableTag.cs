@@ -16,5 +16,6 @@ namespace LecturaYEscritura.UseCases.Home.Models
         public string Type { get; set; }
         public string Descriptor { get; set; }
         public Area Area { get; set; }
+        public SubArea SubArea { get; set; }
     }
 }

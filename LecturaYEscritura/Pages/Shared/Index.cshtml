@@ -3,54 +3,89 @@
 
 <div class="card text-center">
     <div class="card-header">
-        <ul class="nav nav-tabs card-header-tabs" id="listItems">
+        <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-                <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_control" href="#nav_control">Control de mallas y densidades</a>
+                <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_control">Control de mallas y densidades</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_leyes" href="#nav_leyes">Leyes de estaño</a>
+                <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_leyes">Leyes de estaño</a>
             </li>
         </ul>
     </div>
     <div class="card-body">
-        <div class="row mb-2 justify-content-center">
-            <div class="col-12 col-md-6">
-                <div class="search-bar">
-                    <div class="input">
-                        <input id="tagFilter" type="text" class="input-with-icon" placeholder="Busca un Tag">
-                        <span class="iconify" data-inline="false" data-icon="akar-icons:search" style="font-size: 24px;"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center mt-2 mb-2">
-            <div class="col-12">
-                <div class="search-bar d-flex justify-content-between">
-                    <div>
-                        <span id="grid-view" class="view-switcher">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M1 2.5C1 2.10218 1.15804 1.72064 1.43934 1.43934C1.72064 1.15804 2.10218 1 2.5 1H5.5C5.89782 1 6.27936 1.15804 6.56066 1.43934C6.84196 1.72064 7 2.10218 7 2.5V5.5C7 5.89782 6.84196 6.27936 6.56066 6.56066C6.27936 6.84196 5.89782 7 5.5 7H2.5C2.10218 7 1.72064 6.84196 1.43934 6.56066C1.15804 6.27936 1 5.89782 1 5.5V2.5ZM9 2.5C9 2.10218 9.15804 1.72064 9.43934 1.43934C9.72064 1.15804 10.1022 1 10.5 1H13.5C13.8978 1 14.2794 1.15804 14.5607 1.43934C14.842 1.72064 15 2.10218 15 2.5V5.5C15 5.89782 14.842 6.27936 14.5607 6.56066C14.2794 6.84196 13.8978 7 13.5 7H10.5C10.1022 7 9.72064 6.84196 9.43934 6.56066C9.15804 6.27936 9 5.89782 9 5.5V2.5ZM1 10.5C1 10.1022 1.15804 9.72064 1.43934 9.43934C1.72064 9.15804 2.10218 9 2.5 9H5.5C5.89782 9 6.27936 9.15804 6.56066 9.43934C6.84196 9.72064 7 10.1022 7 10.5V13.5C7 13.8978 6.84196 14.2794 6.56066 14.5607C6.27936 14.842 5.89782 15 5.5 15H2.5C2.10218 15 1.72064 14.842 1.43934 14.5607C1.15804 14.2794 1 13.8978 1 13.5V10.5ZM9 10.5C9 10.1022 9.15804 9.72064 9.43934 9.43934C9.72064 9.15804 10.1022 9 10.5 9H13.5C13.8978 9 14.2794 9.15804 14.5607 9.43934C14.842 9.72064 15 10.1022 15 10.5V13.5C15 13.8978 14.842 14.2794 14.5607 14.5607C14.2794 14.842 13.8978 15 13.5 15H10.5C10.1022 15 9.72064 14.842 9.43934 14.5607C9.15804 14.2794 9 13.8978 9 13.5V10.5Z" fill="#C4C4C4" />
-                            </svg>
-                        </span>
-                        <span class="text-tag">|</span>
-                        <span id="list-view" class="view-switcher">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4 8C4.55228 8 5 7.55228 5 7C5 6.44772 4.55228 6 4 6C3.44772 6 3 6.44772 3 7C3 7.55228 3.44772 8 4 8Z" fill="#C4C4C4" />
-                                <path d="M4 13C4.55228 13 5 12.5523 5 12C5 11.4477 4.55228 11 4 11C3.44772 11 3 11.4477 3 12C3 12.5523 3.44772 13 4 13Z" fill="#C4C4C4" />
-                                <path d="M4 18C4.55228 18 5 17.5523 5 17C5 16.4477 4.55228 16 4 16C3.44772 16 3 16.4477 3 17C3 17.5523 3.44772 18 4 18Z" fill="#C4C4C4" />
-                                <path d="M20.06 11H7.94C7.42085 11 7 11.4209 7 11.94V12.06C7 12.5791 7.42085 13 7.94 13H20.06C20.5791 13 21 12.5791 21 12.06V11.94C21 11.4209 20.5791 11 20.06 11Z" fill="#C4C4C4" />
-                                <path d="M20.06 16H7.94C7.42085 16 7 16.4209 7 16.94V17.06C7 17.5791 7.42085 18 7.94 18H20.06C20.5791 18 21 17.5791 21 17.06V16.94C21 16.4209 20.5791 16 20.06 16Z" fill="#C4C4C4" />
-                                <path d="M20.06 6H7.94C7.42085 6 7 6.42085 7 6.94V7.06C7 7.57915 7.42085 8 7.94 8H20.06C20.5791 8 21 7.57915 21 7.06V6.94C21 6.42085 20.5791 6 20.06 6Z" fill="#C4C4C4" />
-                            </svg>
-                        </span>
-                    </div>
-
-                </div>
-            </div>
-        </div>
         <div class="row">
-            <div class="tags-main-container col-12 mt-2" id="cards">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_remo_con">REMOLIENDA DE CONCENTRADOS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_mol_prim">MOLIENDA PRIMARIA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_grab_gru">GRAVIMETRÍA GRUESA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_grab_med">GRAVIMETRÍA MEDIA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_grab_fin">GRAVIMETRÍA FINA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_grab_ufin">GRAVIMETRÍA ULTRAFINA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_flot_cas">FLOTACION CASITERITA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_desp_con">DESPACHO DE CONCENTRADOS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_desal">DESLAMADO</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body">
+                <div class="row mb-2 justify-content-center">
+                    <div class="col-12 col-md-6">
+                        <div class="search-bar">
+                            <div class="input">
+                                <input id="tagFilter" type="text" class="input-with-icon" placeholder="Busca un Tag">
+                                <span class="iconify" data-inline="false" data-icon="akar-icons:search" style="font-size: 24px;"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-center mt-2 mb-2">
+                    <div class="col-12">
+                        <div class="search-bar d-flex justify-content-between">
+                            <div>
+                                <span id="grid-view" class="view-switcher">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 2.5C1 2.10218 1.15804 1.72064 1.43934 1.43934C1.72064 1.15804 2.10218 1 2.5 1H5.5C5.89782 1 6.27936 1.15804 6.56066 1.43934C6.84196 1.72064 7 2.10218 7 2.5V5.5C7 5.89782 6.84196 6.27936 6.56066 6.56066C6.27936 6.84196 5.89782 7 5.5 7H2.5C2.10218 7 1.72064 6.84196 1.43934 6.56066C1.15804 6.27936 1 5.89782 1 5.5V2.5ZM9 2.5C9 2.10218 9.15804 1.72064 9.43934 1.43934C9.72064 1.15804 10.1022 1 10.5 1H13.5C13.8978 1 14.2794 1.15804 14.5607 1.43934C14.842 1.72064 15 2.10218 15 2.5V5.5C15 5.89782 14.842 6.27936 14.5607 6.56066C14.2794 6.84196 13.8978 7 13.5 7H10.5C10.1022 7 9.72064 6.84196 9.43934 6.56066C9.15804 6.27936 9 5.89782 9 5.5V2.5ZM1 10.5C1 10.1022 1.15804 9.72064 1.43934 9.43934C1.72064 9.15804 2.10218 9 2.5 9H5.5C5.89782 9 6.27936 9.15804 6.56066 9.43934C6.84196 9.72064 7 10.1022 7 10.5V13.5C7 13.8978 6.84196 14.2794 6.56066 14.5607C6.27936 14.842 5.89782 15 5.5 15H2.5C2.10218 15 1.72064 14.842 1.43934 14.5607C1.15804 14.2794 1 13.8978 1 13.5V10.5ZM9 10.5C9 10.1022 9.15804 9.72064 9.43934 9.43934C9.72064 9.15804 10.1022 9 10.5 9H13.5C13.8978 9 14.2794 9.15804 14.5607 9.43934C14.842 9.72064 15 10.1022 15 10.5V13.5C15 13.8978 14.842 14.2794 14.5607 14.5607C14.2794 14.842 13.8978 15 13.5 15H10.5C10.1022 15 9.72064 14.842 9.43934 14.5607C9.15804 14.2794 9 13.8978 9 13.5V10.5Z" fill="#C4C4C4" />
+                                    </svg>
+                                </span>
+                                <span class="text-tag">|</span>
+                                <span id="list-view" class="view-switcher">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4 8C4.55228 8 5 7.55228 5 7C5 6.44772 4.55228 6 4 6C3.44772 6 3 6.44772 3 7C3 7.55228 3.44772 8 4 8Z" fill="#C4C4C4" />
+                                        <path d="M4 13C4.55228 13 5 12.5523 5 12C5 11.4477 4.55228 11 4 11C3.44772 11 3 11.4477 3 12C3 12.5523 3.44772 13 4 13Z" fill="#C4C4C4" />
+                                        <path d="M4 18C4.55228 18 5 17.5523 5 17C5 16.4477 4.55228 16 4 16C3.44772 16 3 16.4477 3 17C3 17.5523 3.44772 18 4 18Z" fill="#C4C4C4" />
+                                        <path d="M20.06 11H7.94C7.42085 11 7 11.4209 7 11.94V12.06C7 12.5791 7.42085 13 7.94 13H20.06C20.5791 13 21 12.5791 21 12.06V11.94C21 11.4209 20.5791 11 20.06 11Z" fill="#C4C4C4" />
+                                        <path d="M20.06 16H7.94C7.42085 16 7 16.4209 7 16.94V17.06C7 17.5791 7.42085 18 7.94 18H20.06C20.5791 18 21 17.5791 21 17.06V16.94C21 16.4209 20.5791 16 20.06 16Z" fill="#C4C4C4" />
+                                        <path d="M20.06 6H7.94C7.42085 6 7 6.42085 7 6.94V7.06C7 7.57915 7.42085 8 7.94 8H20.06C20.5791 8 21 7.57915 21 7.06V6.94C21 6.42085 20.5791 6 20.06 6Z" fill="#C4C4C4" />
+                                    </svg>
+                                </span>
+                            </div>
 
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="tags-main-container col-12 mt-2" id="cards">
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -121,6 +156,7 @@
         var webIds = [];
         var data = [];
         var area = "";
+        var subarea = "";
         $(document).ready(function () {
             GetTagListValues();            
         });
@@ -130,6 +166,30 @@
             area = "CMD";
             $(".area-CMD").show();
             $(".area-LE").hide();
+
+            $("#nav_remo_con").parent().show();
+            $("#nav_mol_prim").parent().show();
+            $("#nav_grab_gru").parent().show();
+            $("#nav_grab_med").parent().show();
+            $("#nav_grab_fin").parent().show();
+            $("#nav_grab_ufin").parent().hide();
+            $("#nav_flot_cas").parent().show();
+            $("#nav_desp_con").parent().show();
+            $("#nav_desal").parent().hide();
+
+            //$(".subarea-RDC").show();
+            //$(".subarea-MP").show();
+            //$(".subarea-GG").show();
+            //$(".subarea-GM").show();
+            //$(".subarea-GF").show();
+            //$(".subarea-FC").show();
+            //$(".subarea-DDC").show();
+        
+            //$(".subarea-GU").hide();
+            //$(".subarea-D").hide();
+
+            $("#nav_remo_con").click();
+
             $("#tagFilter").val("");
         });
         $("#nav_leyes").on('click', function (e) {
@@ -137,8 +197,103 @@
             area = "LE";
             $(".area-CMD").hide();
             $(".area-LE").show();
+
+            $("#nav_remo_con").parent().hide()
+            $("#nav_mol_prim").parent().hide()
+            $("#nav_grab_gru").parent().show()
+            $("#nav_grab_med").parent().show()
+            $("#nav_grab_fin").parent().show()
+            $("#nav_grab_ufin").parent().show()
+            $("#nav_flot_cas").parent().show()
+            $("#nav_desp_con").parent().show()
+            $("#nav_desal").parent().show()
+
+            //$(".subarea-RDC").hide();
+            //$(".subarea-MP").hide();
+
+            //$(".subarea-GG").show();
+            //$(".subarea-GM").show();
+            //$(".subarea-GF").show();
+            //$(".subarea-FC").show();
+            //$(".subarea-DDC").show();
+            //$(".subarea-GU").show();
+            //$(".subarea-D").show();
+
             $("#tagFilter").val("");
+            $("#nav_grab_gru").click();
         });
+
+        $("#nav_remo_con").on('click', function (e) {
+            $(this).tab('show');
+            subarea = "RDC";
+            $(".tag-container").hide();
+            $(".subarea-RDC").show();
+        });
+        $("#nav_mol_prim").on('click', function (e) {
+            $(this).tab('show');
+            subarea = "MP";
+            $(".tag-container").hide();
+            $(".subarea-MP").show();
+        });
+        $("#nav_grab_gru").on('click', function (e) {
+            $(this).tab('show');
+            subarea = "GG";
+            $(".tag-container").hide();
+            if (area == "CMD")
+                $(".area-CMD.subarea-GG").show();
+            else if (area == "LE")
+                $(".area-LE.subarea-GG").show();
+        });
+        $("#nav_grab_med").on('click', function (e) {
+            $(this).tab('show');
+            subarea = "GM";
+            $(".tag-container").hide();
+            if (area == "CMD")
+                $(".area-CMD.subarea-GM").show();
+            else if (area == "LE")
+                $(".area-LE.subarea-GM").show();
+        });
+        $("#nav_grab_fin").on('click', function (e) {
+            $(this).tab('show');
+            subarea = "GF";
+            $(".tag-container").hide();
+            if (area == "CMD")
+                $(".area-CMD.subarea-GF").show();
+            else if (area == "LE")
+                $(".area-LE.subarea-GF").show();
+        });
+        $("#nav_grab_ufin").on('click', function (e) {
+            $(this).tab('show');
+            subarea = "GU";
+            $(".tag-container").hide();
+            $(".subarea-GU").show();
+        });
+        $("#nav_flot_cas").on('click', function (e) {
+            $(this).tab('show');
+            subarea = "FC";
+            $(".tag-container").hide();
+            if (area == "CMD")
+                $(".area-CMD.subarea-FC").show();
+            else if (area == "LE")
+                $(".area-LE.subarea-FC").show();
+        });
+        $("#nav_desp_con").on('click', function (e) {
+            $(this).tab('show');
+            subarea = "DDC";
+            $(".tag-container").hide();
+            if (area == "CMD")
+                $(".area-CMD.subarea-DDC").show();
+            else if (area == "LE")
+                $(".area-LE.subarea-DDC").show();
+        });
+        $("#nav_desal").on('click', function (e) {
+            $(this).tab('show');
+            subarea = "D";
+            $(".tag-container").hide();
+            $(".subarea-D").show();
+        });
+        
+
         $("#tagFilter").keyup(function () {
             //Filter
             var text = $("#tagFilter").val();
@@ -147,7 +302,7 @@
             if (text != null || text != "") {
                 for (var i = 0; i < data.length; i++) {
                     //Text exist in tag names?
-                    if (data[i].Name.toLowerCase().includes(text.toLowerCase()) && data[i].Area == area)
+                    if (data[i].Name.toLowerCase().includes(text.toLowerCase()) && data[i].Area == area && data[i].SubArea == subarea)
                         filteredData.push(data[i]);
                 }
             }
@@ -170,11 +325,11 @@
             let timeText = '#time_' + webId;
             let valueText = '#value_' + webId;
 
-            let value = $(valueText).val();
-            let time = $(timeText).val();
-            let date = $(dateText).val();
+            //let value = $(valueText).val();
+            //let time = $(timeText).val();
+            //let date = $(dateText).val();
 
-            if ($('#' + webId).hasClass('active') && (value == "" && date == "" && time == "")) {
+            if ($('#' + webId).hasClass('active') /*&& (value == "" && date == "" && time == "")*/) {
                 //Visual
                 $('#' + webId).removeClass('active');
                 //Disable Inputs
@@ -183,7 +338,7 @@
                 $(valueText).attr('disabled', true);
             }
             else {
-                if (value == "" && date == "" && time == "") {
+                /*if (value == "" && date == "" && time == "") {*/
                     //Visual
                     $('#' + webId).addClass('active');
                     //Enable Inputs
@@ -192,7 +347,7 @@
                     $(valueText).attr('disabled', false);
                     //Focus Value
                     $(valueText).focus();
-                }
+                /*}*/
             }
         }
         //Change Date and Time
@@ -241,11 +396,12 @@
                             //console.log(data[i].WebId);
                             webIds.push(data[i].WebId);
                             values.push(JSON.parse(JSON.parse(data[i].Result)));
-                            html += LoadCards(JSON.parse(JSON.parse(data[i].Result)), data[i].Name, data[i].WebId, data[i].Unit, data[i].MinValue, data[i].MaxValue, data[i].Type, data[i].Area, data[i].Descriptor);
+                            html += LoadCards(JSON.parse(JSON.parse(data[i].Result)), data[i].Name, data[i].WebId, data[i].Unit, data[i].MinValue, data[i].MaxValue, data[i].Type, data[i].Area, data[i].SubArea, data[i].Descriptor);
                             //console.log(JSON.parse(JSON.parse(data[i].Result)));
                         }
                         $('#cards').html(html);
                         $("#nav_control").click();
+                        $("#nav_remo_con").click();
                     }
                 }
             });
@@ -282,14 +438,14 @@
                 }
             });
         }
-        function LoadCards(data, name, webId, unit, minVal, maxVal, type, area, descriptor) {
+        function LoadCards(data, name, webId, unit, minVal, maxVal, type, area, subarea, descriptor) {
             var html = "";
             var lastValue = GetLastValue(data.Items);
-            html = `<div class="tag-container area-${area}">
-                        <div class="tag-item" id="${webId}" onclick="ChangeActive('${webId}')">
+            html = `<div class="tag-container area-${area} subarea-${subarea}">
+                        <div class="tag-item" id="${webId}">
                             <div class="tag-disposition">
                                 <div class="tag-item-header">
-                                    <div class="tag-item-title">
+                                    <div class="tag-item-title" onclick="ChangeActive('${webId}')">
                                         <span class="text-tag fw-600">${name}</span>
                                     </div>
                                     <div class="tag-item-separator-list"></div>
@@ -297,7 +453,7 @@
                                         <div class="row d-flex justify-content-center">
                                             <div class="col-6 custom-col-4">
                                                 <div class="input">                                                    
-                                                    <input type="number" id="value_${webId}" min=${minVal} max=${maxVal} dataType="${type}" class="form-control-custom" placeholder="Valor" disabled>
+                                                    <input type="number" id="value_${webId}" min=${minVal} max=${maxVal} dataType="${type}" class="form-control-custom" placeholder="Valor (${unit})" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-6 custom-col-4">
@@ -397,7 +553,7 @@
                 let valueText = '#value_' + webId;
                 let date = $(dateText).val();
                 let time = $(timeText).val();
-                let value = $(valueText).val();
+                let value = parseFloat($(valueText).val());
                 if (ValidateData(date, time, value, webId)) {
                     console.log("VALIDO");
                     console.log("WebId: ", webId);
@@ -445,8 +601,8 @@
         function ValidateData(date, time, value, webId) {
             let id = '#value_' + webId;
             let dataType = $(id).attr("dataType")
-            let max = parseInt($(id).attr('max'));
-            let min = parseInt($(id).attr('min'));
+            let max = parseFloat($(id).attr('max'));
+            let min = parseFloat($(id).attr('min'));
 
             if (date == null || time == null || value == null || date.length <= 0 || time.length <= 0 || value == ""){
                 $('#danger_' + webId).text("Todos los campos deben estar completos");
@@ -474,7 +630,7 @@
                     return false;
                 }
                 //Interger Validation
-                if (dataType === 'int' && !Number.isInteger(value)) {
+                if (dataType === 'int' && !(value === parseInt(value, 10))) {
                     $('#danger_' + webId).text("El valor debe ser entero");
                     //$(id).css('border-color', '#FF0000');
                     $(id).focus();
