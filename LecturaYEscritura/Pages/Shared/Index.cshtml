@@ -157,8 +157,9 @@
         var data = [];
         var area = "";
         var subarea = "";
+        var temp;
         $(document).ready(function () {
-            GetTagListValues();            
+            GetTagsInfo();
         });
 
         $("#nav_control").on('click', function (e) {
@@ -371,8 +372,8 @@
             }
             $("#custom_datetime_modal").modal('hide');
         }
-        //Get Tag List Values
-        function GetTagListValues() {
+        //Get Tag Pi Points Info
+        function GetTagsInfo() {
             var html = "";
             var values = [];
             webIds.length = 0;
@@ -380,7 +381,7 @@
             $('#cards').empty();
             $.ajax({
                 type: "POST",
-                url: "/Home/GetTagListValues",
+                url: "/Home/GetTagsInfo",
                 traditional: true,
                 success: (response) => {
                     let process = JSON.parse(response.process);
@@ -406,6 +407,41 @@
                 }
             });
         }
+        //Get Tag List Values
+        //function GetTagListValues() {
+        //    var html = "";
+        //    var values = [];
+        //    webIds.length = 0;
+        //    data.length = 0;
+        //    $('#cards').empty();
+        //    $.ajax({
+        //        type: "POST",
+        //        url: "/Home/GetTagListValues",
+        //        traditional: true,
+        //        success: (response) => {
+        //            let process = JSON.parse(response.process);
+        //            for (let i = 0; i < process.length; i++) {
+        //                console.log(process[i]);
+        //            }
+        //            if (response.success) {
+        //                data = JSON.parse(response.data);
+        //                console.log("data", data);
+        //                for (let i = 0; i < data.length; i++) {
+        //                    //console.log("--------------------------------");
+        //                    //console.log(data[i].Name);
+        //                    //console.log(data[i].WebId);
+        //                    webIds.push(data[i].WebId);
+        //                    values.push(JSON.parse(JSON.parse(data[i].Result)));
+        //                    html += LoadCards(JSON.parse(JSON.parse(data[i].Result)), data[i].Name, data[i].WebId, data[i].Unit, data[i].MinValue, data[i].MaxValue, data[i].Type, data[i].Area, data[i].SubArea, data[i].Descriptor);
+        //                    //console.log(JSON.parse(JSON.parse(data[i].Result)));
+        //                }
+        //                $('#cards').html(html);
+        //                $("#nav_control").click();
+        //                $("#nav_remo_con").click();
+        //            }
+        //        }
+        //    });
+        //}
         //Get Tag Data
         function GetTagData(webId) {
             console.log("--GET TAG DATA--");
@@ -453,7 +489,7 @@
                                         <div class="row d-flex justify-content-center">
                                             <div class="col-6 custom-col-4">
                                                 <div class="input">                                                    
-                                                    <input type="number" id="value_${webId}" min=${minVal} max=${maxVal} dataType="${type}" class="form-control-custom" ${type == "int" ? 'step = "1"' : 'step = "0.0001"'} placeholder="Valor (${unit})" disabled>
+                                                    <input type="number" id="value_${webId}" min=${minVal} max=${maxVal} dataType="${type}" class="form-control-custom" ${type.toLowerCase().includes("int") ? 'step = "1"' : 'step = "0.0001"'} placeholder="Valor (${unit})" disabled>
                                                 </div>
                                             </div>
                                             <div class="col-6 custom-col-4">
@@ -630,7 +666,7 @@
                     return false;
                 }
                 //Interger Validation
-                if (dataType === 'int' && !(value === parseInt(value, 10))) {
+                if (dataType.toLowerCase().includes('int') && !(value === parseInt(value, 10))) {
                     $('#danger_' + webId).text("El valor debe ser entero");
                     //$(id).css('border-color', '#FF0000');
                     $(id).focus();

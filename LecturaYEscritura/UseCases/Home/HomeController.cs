@@ -1,25 +1,25 @@
 ﻿using LecturaYEscritura.UseCases.Home;
 using LecturaYEscritura.UseCases.Home.Models;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace LecturaYEscritura.UseCases
 {
     public class HomeController : Controller
     {
-        private static string baseUrl = "https://svsrfpivision.mineria.breca/piwebapi/";
-        private static string userName = @"mineria\admin.pi";
-        private static string password = @"Q=i5G3uPt$";
+        private readonly IWebHostEnvironment _hostingEnvironment;
+        private static readonly string baseUrl = "https://svsrfpivision.mineria.breca/piwebapi/";
+        private static readonly string userName = @"mineria\admin.pi";
+        private static readonly string password = @"Q=i5G3uPt$";
 
-        private static List<WritableTag> WritableTagsList = new List<WritableTag>();
+        private static readonly List<WritableTag> WritableTagsList = new List<WritableTag>();
         private static readonly List<Area> AreasList = new List<Area> { 
             new Area { Id = 1,Descripcion= "Control de mallas y densidades" },
             new Area { Id = 2, Descripcion = "Leyes de estaño" } 
@@ -48,6 +48,11 @@ namespace LecturaYEscritura.UseCases
             public string SubArea { get; set; }
             public string Result { get; set; }
         }
+        public HomeController(IWebHostEnvironment hostingEnvironment)
+        {
+            _hostingEnvironment = hostingEnvironment;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -188,6 +193,168 @@ namespace LecturaYEscritura.UseCases
             return Ok(response);
         }
         [HttpPost]
+        public async Task<IActionResult> GetTagsInfo() {
+            WritableTagsList.Clear();
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(1)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwHgEAAAU1ZTUkZQSUFSQ0hJVkVcNDIzMV9NTF8wMV9BTE0uQk9MQVM"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(3)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwHwEAAAU1ZTUkZQSUFSQ0hJVkVcNDEyMl9UTl9ERVMuTTMyNQ" });
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(2)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwIAEAAAU1ZTUkZQSUFSQ0hJVkVcNDIyMl9NTF8wMV9ERVMuTTMyNQ"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(1)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwIQEAAAU1ZTUkZQSUFSQ0hJVkVcNDIzMV9NTF8wMV9BTE0uTTIwMA"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(1)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwIgEAAAU1ZTUkZQSUFSQ0hJVkVcNDIzMV9NTF8wMV9ERVMuTTIwMA"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(1)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwIwEAAAU1ZTUkZQSUFSQ0hJVkVcNDIzMV9NTF8wMV9ERVMuREVOUw"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(1)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwJAEAAAU1ZTUkZQSUFSQ0hJVkVcNDIzMV9TUl8wMV9ERVMuVVMuREVOUw"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(3)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwJQEAAAU1ZTUkZQSUFSQ0hJVkVcNDIyMV9DSV8wMV9PRi5ERU5T"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(2)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwJgEAAAU1ZTUkZQSUFSQ0hJVkVcNDIyMl9DSV8wMV9PRi5ERU5T"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(4)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwJwEAAAU1ZTUkZQSUFSQ0hJVkVcNDIyMV9DSV8wMl9PRi5ERU5T" });
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(5)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwKAEAAAU1ZTUkZQSUFSQ0hJVkVcNDIxM19DSV8wMV9PRi5ERU5T" });
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(1)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwKQEAAAU1ZTUkZQSUFSQ0hJVkVcNDIyM19DSV8wMV9VRi5ERU5T"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(1)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwKgEAAAU1ZTUkZQSUFSQ0hJVkVcNDIyM19DSV8wMl9VRi5ERU5T"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(3)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwKwEAAAU1ZTUkZQSUFSQ0hJVkVcNDIxMV9DRV9ST19BTE0uREVOUw"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(3)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwLAEAAAU1ZTUkZQSUFSQ0hJVkVcNDIxMV9DRV9DTF9BTE0uREVOUw"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(4)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwLQEAAAU1ZTUkZQSUFSQ0hJVkVcNDIxMl9DQ19ST19BTE0uREVOUw"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(4)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwLgEAAAU1ZTUkZQSUFSQ0hJVkVcNDIxMl9DQ19DTF9BTE0uREVOUw"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(5)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwLwEAAAU1ZTUkZQSUFSQ0hJVkVcNDIxM19UQV9MQURPQV9BTE0uREVOUw"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(5)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwMAEAAAU1ZTUkZQSUFSQ0hJVkVcNDIxM19UQV9MQURPQl9BTE0uREVOUw"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(5)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwMQEAAAU1ZTUkZQSUFSQ0hJVkVcNDIxM19UQV9BTE0uVE9O"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(7)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwMgEAAAU1ZTUkZQSUFSQ0hJVkVcNDI1M19DSF9ERVNQQUNIT19DT05DLlBST0Q" });
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(2)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwMwEAAAU1ZTUkZQSUFSQ0hJVkVcNDIyMl9NTF8wMV9BTE0uQk9MQVM" });
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(6)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwNAEAAAU1ZTUkZQSUFSQ0hJVkVcNDI0M19GQ18wMV9BTE0uREVOUw" });
+                                                                                          
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(3)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwNQEAAAU1ZTUkZQSUFSQ0hJVkVcNDEyMl9UTl9ERVMuJVNO" });
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(6)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwNgEAAAU1ZTUkZQSUFSQ0hJVkVcNDI0M19GTE9UX0NMRUFORVJJSV9DT05DLiVTTg" });
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(5)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwNwEAAAU1ZTUkZQSUFSQ0hJVkVcNDIxM19HUkFWX0NPTkMuJVNO"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(8)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwOAEAAAU1ZTUkZQSUFSQ0hJVkVcNDIxNF9GQUxDT05VRl9DT05DLiVTTg" });
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(8)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwOQEAAAU1ZTUkZQSUFSQ0hJVkVcNDI0M19DRUxMQ09MVU1OX0NPTkMuJVNO"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(6)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwOgEAAAU1ZTUkZQSUFSQ0hJVkVcNDI0M19GTE9UX1NDVl9SRUwuJVNO"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(9)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwOwEAAAU1ZTUkZQSUFSQ0hJVkVcNDI2Ml9MQU1BU18lU04" });
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(3)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwPAEAAAU1ZTUkZQSUFSQ0hJVkVcNDIxMV9DRV9FU1BJUkFMRVNfQ09OQy4lU04"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(4)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwPQEAAAU1ZTUkZQSUFSQ0hJVkVcNDIxMl9DQ19GQUxDT05DMTAwMF9DT05DLiVTTg"});
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(6)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwPgEAAAU1ZTUkZQSUFSQ0hJVkVcNDI0M19GTE9UX1JPVUdIRVJfQUxJTS4lU04" });
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(7)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwPwEAAAU1ZTUkZQSUFSQ0hJVkVcNDI1M19GRF9DT05DRU5UUkFET19GSU5BTC4lU04" });
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(8)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwQAEAAAU1ZTUkZQSUFSQ0hJVkVcNDI0M19DRUxMQ09MVU1OX0NPTkMuJVNOX1JFVg" });
+            
+            dynamic response;
+            bool success = true;
+            var process = new List<string>();
+            var results = new List<TagListResponse>();
+            PIWebApiClient piWebAPIClient = new PIWebApiClient(userName, password);
+            var tagsList = new List<object>();
+            //Ask for Tags info
+            foreach (var writeableTag in WritableTagsList)
+            {
+                try
+                {
+                    //Resolve tag path
+                    string requestUrl = baseUrl + "/points/"+writeableTag.WebId;
+                    process.Add("--------------------------------");
+                    process.Add("TGET");
+                    string tget = await piWebAPIClient.GetAsync(requestUrl);
+                    var prop = JsonConvert.DeserializeObject(tget);
+                    tagsList.Add(prop);                
+                    process.Add("Exito...");
+                }
+                catch (HttpRequestException ex)
+                {
+                    process.Add("Error...");
+                    process.Add(ex.Message);
+                    success = false;
+                }
+                catch (Exception ex)
+                {
+                    process.Add("Error...");
+                    process.Add(ex.Message);
+                    success = false;
+                }
+            }
+            //Update Tags info (Descriptor, Path, Unit, Min, Max and Type)
+            string json = JsonConvert.SerializeObject(tagsList);
+            foreach (var item in tagsList)
+            {
+                var tagItem = JsonConvert.DeserializeObject<PiPointsResponse>((string)item);
+                WritableTagsList
+                    .Where(x => x.WebId.Equals(tagItem.WebId))
+                    .Select(x=> {
+                        x.Name = tagItem.Name;
+                        x.Descriptor = tagItem.Descriptor;
+                        x.Path = tagItem.Path;
+                        x.Unit = tagItem.EngineeringUnits;
+                        x.MinValue = tagItem.Zero;
+                        x.MaxValue = tagItem.Zero + tagItem.Span;
+                        x.Type = tagItem.PointType;
+                        return x; })
+                    .ToList();
+            }
+            //Ask for values of Tags
+            foreach (var writeableTag in WritableTagsList)
+            {
+                try
+                {
+                    //Resolve tag path
+                    string requestUrl = baseUrl + "/streams/" + writeableTag.WebId + "/plot";
+                    string tget = await piWebAPIClient.GetAsync(requestUrl);
+                    process.Add("--------------------------------");
+                    process.Add("Asking for values of " + writeableTag.Name);
+                    process.Add("WebID " + writeableTag.WebId);
+                    process.Add("Processing...");
+
+                    string area = "";
+                    string subarea = "";
+                    switch (writeableTag.Area.Id)
+                    {
+                        case 1: area = "CMD"; break;
+                        case 2: area = "LE"; break;
+                    }
+                    switch (writeableTag.SubArea.Id)
+                    {
+                        case 1: subarea = "RDC"; break;
+                        case 2: subarea = "MP"; break;
+                        case 3: subarea = "GG"; break;
+                        case 4: subarea = "GM"; break;
+                        case 5: subarea = "GF"; break;
+                        case 6: subarea = "FC"; break;
+                        case 7: subarea = "DDC"; break;
+                        case 8: subarea = "GU"; break;
+                        case 9: subarea = "D"; break;
+                    }                    
+                    results.Add(new TagListResponse
+                    {
+                        WebId = writeableTag.WebId,
+                        Name = writeableTag.Name,
+                        Result = tget,
+                        MinValue = writeableTag.MinValue,
+                        MaxValue = writeableTag.MaxValue,
+                        Type = writeableTag.Type,
+                        Unit = writeableTag.Unit,
+                        Area = area,
+                        SubArea = subarea,
+                        Descriptor = writeableTag.Descriptor
+                    });
+
+                    process.Add("Exito...");
+                }
+                catch (HttpRequestException ex)
+                {
+                    process.Add("Error...");
+                    process.Add(ex.Message);
+                    success = false;
+                }
+                catch (Exception ex)
+                {
+                    process.Add("Error...");
+                    process.Add(ex.Message);
+                    success = false;
+                }
+            }
+
+            piWebAPIClient.Dispose();
+            response = new
+            {
+                success = success,
+                process = JsonConvert.SerializeObject(process),
+                data = JsonConvert.SerializeObject(results)
+            };
+            return Ok(response);
+        }
+        [HttpPost]
         public async Task<IActionResult> GetTagData(string webId)
         {
             dynamic response;
@@ -293,6 +460,38 @@ namespace LecturaYEscritura.UseCases
             }
             
             return Ok(response);
+        }
+
+        public class PiPointsResponse
+        {
+            public string WebId { get; set; }
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public string Path { get; set; }
+            public string Descriptor { get; set; }
+            public string PointClass { get; set; }
+            public string PointType { get; set; }
+            public string DigitalSetName { get; set; }
+            public string EngineeringUnits { get; set; }
+            public float Span { get; set; }
+            public float Zero { get; set; }
+            public bool Step { get; set; }
+            public bool Future { get; set; }
+            public float DisplayDigits { get; set; }
+            //public Links Links { get; set; }
+        }
+        public class Links
+        {
+
+            public string Self { get; set; }
+            public string DataServer { get; set; }
+            public string Attributes { get; set; }
+            public string InterpolatedData { get; set; }
+            public string RecordedData { get; set; }
+            public string PlotData { get; set; }
+            public string SummaryData { get; set; }
+            public string Value { get; set; }
+            public string EndValue { get; set; }
         }
     }
 }
