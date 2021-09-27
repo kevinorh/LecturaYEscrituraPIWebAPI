@@ -5,10 +5,10 @@
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-                <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_control">Control de mallas y densidades</a>
+                <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_control">CONTROL DE MALLAS Y DENSIDADES</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_leyes">Leyes de estaño</a>
+                <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_leyes">LEYES DE ESTAÑO</a>
             </li>
         </ul>
     </div>
@@ -17,31 +17,31 @@
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_remo_con">REMOLIENDA DE CONCENTRADOS</a>
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_remo_con">Remolienda de Concentrados</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_mol_prim">MOLIENDA PRIMARIA</a>
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_mol_prim">Molienda Primaria</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_grab_gru">GRAVIMETRÍA GRUESA</a>
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_grab_gru">Gravimetría Gruesa</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_grab_med">GRAVIMETRÍA MEDIA</a>
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_grab_med">Gravimetría Media</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_grab_fin">GRAVIMETRÍA FINA</a>
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_grab_fin">Gravimetría Fina</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_grab_ufin">GRAVIMETRÍA ULTRAFINA</a>
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_grab_ufin">Gravimetría Ultrafina</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_flot_cas">FLOTACION CASITERITA</a>
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_flot_cas">Flotación Casiterita</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_desp_con">DESPACHO DE CONCENTRADOS</a>
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_desp_con">Despacho de Concentrados</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_desal">DESLAMADO</a>
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_desal">Deslamado</a>
                     </li>
                 </ul>
             </div>
@@ -565,7 +565,8 @@
                         //console.log("New Value: ", data[i].Value);
                         //console.log("New Date: ", data[i].Timestamp);
                         value = data[i].Value;
-                        date = data[i].Timestamp;
+                        date = new Date(data[i].Timestamp).addHours(-5).toISOString();
+                        
                     }
                 }
             }
@@ -674,6 +675,10 @@
                 }
                 return true;
             }
-        }        
+        }
+        Date.prototype.addHours = function (h) {
+            this.setHours(this.getHours() + h);
+            return this;
+        }
     </script>
 }

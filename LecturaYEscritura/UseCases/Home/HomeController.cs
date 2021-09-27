@@ -21,19 +21,19 @@ namespace LecturaYEscritura.UseCases
 
         private static readonly List<WritableTag> WritableTagsList = new List<WritableTag>();
         private static readonly List<Area> AreasList = new List<Area> { 
-            new Area { Id = 1,Descripcion= "Control de mallas y densidades" },
-            new Area { Id = 2, Descripcion = "Leyes de estaño" } 
+            new Area { Id = 1,Descripcion= "CONTROL DE MALLAS Y DENSIDADES" },
+            new Area { Id = 2, Descripcion = "LEYES DE ESTAÑO" } 
         };
         private static readonly List<SubArea> SubAreasList = new List<SubArea> { 
-            new SubArea { Id = 1,Descripcion= "REMOLIENDA DE CONCENTRADOS" },
-            new SubArea { Id = 2, Descripcion = "MOLIENDA PRIMARIA" } ,
-            new SubArea { Id = 3, Descripcion = "GRAVIMETRÍA GRUESA" } ,
-            new SubArea { Id = 4, Descripcion = "GRAVIMETRIA MEDIA" } ,
-            new SubArea { Id = 5, Descripcion = "GRAVIMETRIA FINA" } ,
-            new SubArea { Id = 6, Descripcion = "FLOTACION CASITERITA" } ,
-            new SubArea { Id = 7, Descripcion = "DESPACHO DE CONCENTRADOS" } ,
-            new SubArea { Id = 8, Descripcion = "GRAVIMETRIA ULTRAFINA" } ,
-            new SubArea { Id = 9, Descripcion = "DESLAMADO" }
+            new SubArea { Id = 1,Descripcion= "Remolienda de Concentrados" },
+            new SubArea { Id = 2, Descripcion = "Molienda Primaria" } ,
+            new SubArea { Id = 3, Descripcion = "Gravimetría Gruesa" } ,
+            new SubArea { Id = 4, Descripcion = "Gravimetría Media" } ,
+            new SubArea { Id = 5, Descripcion = "Gravimetría Fina" } ,
+            new SubArea { Id = 6, Descripcion = "Flotación Casiterita" } ,
+            new SubArea { Id = 7, Descripcion = "Despacho de Concentrados" } ,
+            new SubArea { Id = 8, Descripcion = "Gravimetría Ultrafina" } ,
+            new SubArea { Id = 9, Descripcion = "Deslamado" }
         };
         private class TagListResponse
         {
@@ -144,17 +144,6 @@ namespace LecturaYEscritura.UseCases
                         case 8: subarea = "GU"; break;
                         case 9: subarea = "D"; break;
                     }
-                    /*
-                     new SubArea { Id = 1,Descripcion= "REMOLIENDA DE CONCENTRADOS" },
-            new SubArea { Id = 2, Descripcion = "MOLIENDA PRIMARIA" } ,
-            new SubArea { Id = 3, Descripcion = "GRAVIMETRÍA GRUESA" } ,
-            new SubArea { Id = 4, Descripcion = "GRAVIMETRIA MEDIA" } ,
-            new SubArea { Id = 5, Descripcion = "GRAVIMETRIA FINA" } ,
-            new SubArea { Id = 6, Descripcion = "FLOTACION CASITERITA" } ,
-            new SubArea { Id = 7, Descripcion = "DESPACHO DE CONCENTRADOS" } ,
-            new SubArea { Id = 8, Descripcion = "GRAVIMETRIA ULTRAFINA" } ,
-            new SubArea { Id = 9, Descripcion = "DESLAMADO" } ,
-                     */
                     results.Add(new TagListResponse {
                         WebId = writeableTag.WebId , 
                         Name = writeableTag.Name, 
@@ -218,7 +207,8 @@ namespace LecturaYEscritura.UseCases
             WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(7)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwMgEAAAU1ZTUkZQSUFSQ0hJVkVcNDI1M19DSF9ERVNQQUNIT19DT05DLlBST0Q" });
             WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(2)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwMwEAAAU1ZTUkZQSUFSQ0hJVkVcNDIyMl9NTF8wMV9BTE0uQk9MQVM" });
             WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(6)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwNAEAAAU1ZTUkZQSUFSQ0hJVkVcNDI0M19GQ18wMV9BTE0uREVOUw" });
-                                                                                          
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(7)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwQQEAAAU1ZTUkZQSUFSQ0hJVkVcNDI1M19GRF9DT05DRU5UUkFET19GSU5BTC4lSDJP" });
+
             WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(3)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwNQEAAAU1ZTUkZQSUFSQ0hJVkVcNDEyMl9UTl9ERVMuJVNO" });
             WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(6)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwNgEAAAU1ZTUkZQSUFSQ0hJVkVcNDI0M19GTE9UX0NMRUFORVJJSV9DT05DLiVTTg" });
             WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(5)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwNwEAAAU1ZTUkZQSUFSQ0hJVkVcNDIxM19HUkFWX0NPTkMuJVNO"});
@@ -230,7 +220,7 @@ namespace LecturaYEscritura.UseCases
             WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(4)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwPQEAAAU1ZTUkZQSUFSQ0hJVkVcNDIxMl9DQ19GQUxDT05DMTAwMF9DT05DLiVTTg"});
             WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(6)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwPgEAAAU1ZTUkZQSUFSQ0hJVkVcNDI0M19GTE9UX1JPVUdIRVJfQUxJTS4lU04" });
             WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(7)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwPwEAAAU1ZTUkZQSUFSQ0hJVkVcNDI1M19GRF9DT05DRU5UUkFET19GSU5BTC4lU04" });
-            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(8)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwQAEAAAU1ZTUkZQSUFSQ0hJVkVcNDI0M19DRUxMQ09MVU1OX0NPTkMuJVNOX1JFVg" });
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(8)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwQAEAAAU1ZTUkZQSUFSQ0hJVkVcNDI0M19DRUxMQ09MVU1OX1JFTC4lU04" });
             
             dynamic response;
             bool success = true;
@@ -415,11 +405,13 @@ namespace LecturaYEscritura.UseCases
                 string timeSpan;
                 if(DateTime.TryParse(fecha + " " + hora, out toTimeSpan))
                 {
-                    timeSpan = toTimeSpan.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                    timeSpan = toTimeSpan.AddHours(5).ToString("yyyy-MM-ddTHH:mm:ssZ");
+                    //timeSpan = toTimeSpan.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                    //timeSpan = timeSpan.
                 }
                 else
                 {
-                    timeSpan = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ssZ");
+                    timeSpan = DateTime.Now.AddHours(5).ToString("yyyy-MM-ddTHH:mm:ssZ");
                 }
                 var input = new PIWebAPIInput
                 {
