@@ -16,8 +16,8 @@ namespace LecturaYEscritura.UseCases
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
         private static readonly string baseUrl = "https://svsrfpivision.mineria.breca/piwebapi/";
-        private static readonly string userName = @"mineria\admin.pi";
-        private static readonly string password = @"Q=i5G3uPt$";
+        private static readonly string userName = @"mineria\serv.pml02";
+        private static readonly string password = @"$$$Pqru%%%00";
 
         private static readonly List<WritableTag> WritableTagsList = new List<WritableTag>();
         private static readonly List<Area> AreasList = new List<Area> { 
@@ -208,6 +208,7 @@ namespace LecturaYEscritura.UseCases
             WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(2)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwMwEAAAU1ZTUkZQSUFSQ0hJVkVcNDIyMl9NTF8wMV9BTE0uQk9MQVM" });
             WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(6)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwNAEAAAU1ZTUkZQSUFSQ0hJVkVcNDI0M19GQ18wMV9BTE0uREVOUw" });
             WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(7)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwQQEAAAU1ZTUkZQSUFSQ0hJVkVcNDI1M19GRF9DT05DRU5UUkFET19GSU5BTC4lSDJP" });
+            WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(1)), SubArea = SubAreasList.Find(x => x.Id.Equals(1)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwQgEAAAU1ZTUkZQSUFSQ0hJVkVcNDIzMV9TUl8wMV9ERVMuVVMuTTIwMA" });
 
             WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(3)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwNQEAAAU1ZTUkZQSUFSQ0hJVkVcNDEyMl9UTl9ERVMuJVNO" });
             WritableTagsList.Add(new WritableTag { Area = AreasList.Find(x => x.Id.Equals(2)), SubArea = SubAreasList.Find(x => x.Id.Equals(6)), WebId = "F1DP1NYTaEQugEWVxMlNxGu3zwNgEAAAU1ZTUkZQSUFSQ0hJVkVcNDI0M19GTE9UX0NMRUFORVJJSV9DT05DLiVTTg" });
