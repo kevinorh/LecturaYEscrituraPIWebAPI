@@ -16,8 +16,8 @@ namespace LecturaYEscritura.UseCases
     {
         private readonly IWebHostEnvironment _hostingEnvironment;
         private static readonly string baseUrl = "https://svsrfpivision.mineria.breca/piwebapi/";
-        private static readonly string userName = @"mineria\serv.pml02";
-        private static readonly string password = @"$#a0p1Nm$";
+        private static readonly string userName = @"domain\user";
+        private static readonly string password = @"Pa$$W0rd";
 
         private static readonly List<WritableTag> WritableTagsList = new List<WritableTag>();
         private static readonly List<Area> AreasList = new List<Area> { 
