@@ -18,14 +18,25 @@ namespace LecturaYEscritura.UseCases.Home
          * This can be used with Kerberos authentication for PI Web API. */
         public PIWebApiClient()
         {
-            client = new HttpClient(new HttpClientHandler() { UseDefaultCredentials = true });
+            client = new HttpClient(new HttpClientHandler()
+            {
+                //UseDefaultCredentials = true,
+                UseDefaultCredentials = false,
+                ClientCertificateOptions = ClientCertificateOption.Manual,
+                ServerCertificateCustomValidationCallback =  (httpRequestMessage, cert, cetChain, policyErrors) =>
+                {
+                    return true;
+                },         
+                //SslProtocols = System.Security.Authentication.SslProtocols.None
+            });
+
         }
 
         /* Initializing HttpClient by providing a username and password. The basic authentication header is added to the HttpClient.
          * This can be used with Basic authentication for PI Web API. */
         public PIWebApiClient(string userName, string password)
         {
-            client = new HttpClient();
+            client = new HttpClient();   
             string authInfo = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(String.Format("{0}:{1}", userName, password)));
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authInfo);
         }

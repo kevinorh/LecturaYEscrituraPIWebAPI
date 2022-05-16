@@ -5,10 +5,7 @@
     <div class="card-header">
         <ul class="nav nav-tabs card-header-tabs">
             <li class="nav-item">
-                <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_control">CONTROL DE MALLAS Y DENSIDADES</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_leyes">LEYES DE ESTAÑO</a>
+                <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_control">PUCAMARCA</a>
             </li>
         </ul>
     </div>
@@ -17,31 +14,16 @@
             <div class="card-header">
                 <ul class="nav nav-tabs card-header-tabs">
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_remo_con">Remolienda de Concentrados</a>
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_chanc">CHANCADO</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_mol_prim">Molienda Primaria</a>
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_lix">LIXIVIACIÓN</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_grab_gru">Gravimetría Gruesa</a>
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_adr">ADR</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_grab_med">Gravimetría Media</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_grab_fin">Gravimetría Fina</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_grab_ufin">Gravimetría Ultrafina</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_flot_cas">Flotación Casiterita</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_desp_con">Despacho de Concentrados</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_desal">Deslamado</a>
+                        <a class="nav-link" style="color: #0D5B98;" data-toggle="tab" id="nav_azu">AZUFRE</a>
                     </li>
                 </ul>
             </div>
@@ -164,32 +146,16 @@
 
         $("#nav_control").on('click', function (e) {
             $(this).tab('show');
-            area = "CMD";
-            $(".area-CMD").show();
-            $(".area-LE").hide();
+            area = "PUCAMARCA";
+            $(".area-PUCAMARCA").show();
+            //$(".area-LE").hide();
 
-            $("#nav_remo_con").parent().show();
-            $("#nav_mol_prim").parent().show();
-            $("#nav_grab_gru").parent().show();
-            $("#nav_grab_med").parent().show();
-            $("#nav_grab_fin").parent().show();
-            $("#nav_grab_ufin").parent().hide();
-            $("#nav_flot_cas").parent().show();
-            $("#nav_desp_con").parent().show();
-            $("#nav_desal").parent().hide();
+            $("#nav_chanc").parent().show();
+            $("#nav_lix").parent().show();
+            $("#nav_adr").parent().show();
+            $("#nav_azu").parent().show();
 
-            //$(".subarea-RDC").show();
-            //$(".subarea-MP").show();
-            //$(".subarea-GG").show();
-            //$(".subarea-GM").show();
-            //$(".subarea-GF").show();
-            //$(".subarea-FC").show();
-            //$(".subarea-DDC").show();
-        
-            //$(".subarea-GU").hide();
-            //$(".subarea-D").hide();
-
-            $("#nav_remo_con").click();
+            $("#nav_chanc").click();
 
             $("#tagFilter").val("");
         });
@@ -199,17 +165,17 @@
             $(".area-CMD").hide();
             $(".area-LE").show();
 
-            $("#nav_remo_con").parent().hide()
-            $("#nav_mol_prim").parent().hide()
-            $("#nav_grab_gru").parent().show()
-            $("#nav_grab_med").parent().show()
-            $("#nav_grab_fin").parent().show()
-            $("#nav_grab_ufin").parent().show()
-            $("#nav_flot_cas").parent().show()
-            $("#nav_desp_con").parent().show()
-            $("#nav_desal").parent().show()
+            $("#nav_chanc").parent().hide()
+            $("#nav_lix").parent().hide()
+            $("#nav_adr").parent().hide()
+            $("#nav_azu").parent().hide()
+            //$("#nav_grab_fin").parent().show()
+            //$("#nav_grab_ufin").parent().show()
+            //$("#nav_flot_cas").parent().show()
+            //$("#nav_desp_con").parent().show()
+            //$("#nav_desal").parent().show()
 
-            //$(".subarea-RDC").hide();
+            //$(".subarea-chanc").hide();
             //$(".subarea-MP").hide();
 
             //$(".subarea-GG").show();
@@ -221,79 +187,39 @@
             //$(".subarea-D").show();
 
             $("#tagFilter").val("");
-            $("#nav_grab_gru").click();
+            $("#nav_adr").click();
         });
 
-        $("#nav_remo_con").on('click', function (e) {
+        $("#nav_chanc").on('click', function (e) {
             $(this).tab('show');
-            subarea = "RDC";
+            subarea = "chanc";
             $(".tag-container").hide();
-            $(".subarea-RDC").show();
+            $(".subarea-chanc").show();
         });
-        $("#nav_mol_prim").on('click', function (e) {
+        $("#nav_lix").on('click', function (e) {
             $(this).tab('show');
-            subarea = "MP";
+            subarea = "lix";
             $(".tag-container").hide();
-            $(".subarea-MP").show();
+            $(".subarea-lix").show();
         });
-        $("#nav_grab_gru").on('click', function (e) {
+        $("#nav_adr").on('click', function (e) {
             $(this).tab('show');
-            subarea = "GG";
+            subarea = "adr";
             $(".tag-container").hide();
-            if (area == "CMD")
-                $(".area-CMD.subarea-GG").show();
+            if (area == "PUCAMARCA")
+                $(".area-PUCAMARCA.subarea-adr").show();
             else if (area == "LE")
-                $(".area-LE.subarea-GG").show();
+                $(".area-LE.subarea-adr").show();
         });
-        $("#nav_grab_med").on('click', function (e) {
+        $("#nav_azu").on('click', function (e) {
             $(this).tab('show');
-            subarea = "GM";
+            subarea = "azu";
             $(".tag-container").hide();
-            if (area == "CMD")
-                $(".area-CMD.subarea-GM").show();
+            if (area == "PUCAMARCA")
+                $(".area-PUCAMARCA.subarea-azu").show();
             else if (area == "LE")
-                $(".area-LE.subarea-GM").show();
+                $(".area-LE.subarea-azu").show();
         });
-        $("#nav_grab_fin").on('click', function (e) {
-            $(this).tab('show');
-            subarea = "GF";
-            $(".tag-container").hide();
-            if (area == "CMD")
-                $(".area-CMD.subarea-GF").show();
-            else if (area == "LE")
-                $(".area-LE.subarea-GF").show();
-        });
-        $("#nav_grab_ufin").on('click', function (e) {
-            $(this).tab('show');
-            subarea = "GU";
-            $(".tag-container").hide();
-            $(".subarea-GU").show();
-        });
-        $("#nav_flot_cas").on('click', function (e) {
-            $(this).tab('show');
-            subarea = "FC";
-            $(".tag-container").hide();
-            if (area == "CMD")
-                $(".area-CMD.subarea-FC").show();
-            else if (area == "LE")
-                $(".area-LE.subarea-FC").show();
-        });
-        $("#nav_desp_con").on('click', function (e) {
-            $(this).tab('show');
-            subarea = "DDC";
-            $(".tag-container").hide();
-            if (area == "CMD")
-                $(".area-CMD.subarea-DDC").show();
-            else if (area == "LE")
-                $(".area-LE.subarea-DDC").show();
-        });
-        $("#nav_desal").on('click', function (e) {
-            $(this).tab('show');
-            subarea = "D";
-            $(".tag-container").hide();
-            $(".subarea-D").show();
-        });
-        
 
         $("#tagFilter").keyup(function () {
             //Filter
@@ -402,7 +328,7 @@
                         }
                         $('#cards').html(html);
                         $("#nav_control").click();
-                        $("#nav_remo_con").click();
+                        $("#nav_chanc").click();
                     }
                 }
             });
@@ -437,7 +363,7 @@
         //                }
         //                $('#cards').html(html);
         //                $("#nav_control").click();
-        //                $("#nav_remo_con").click();
+        //                $("#nav_chanc").click();
         //            }
         //        }
         //    });
