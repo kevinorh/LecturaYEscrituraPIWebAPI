@@ -3,8 +3,11 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Security;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,22 +16,26 @@ namespace LecturaYEscritura.UseCases.Home
     public class PIWebApiClient
     {
         private HttpClient client;
+        private HttpClientHandler clientHandler;
 
         /* Initiating HttpClient using the default credentials.
          * This can be used with Kerberos authentication for PI Web API. */
         public PIWebApiClient()
         {
-            client = new HttpClient(new HttpClientHandler()
-            {
+            clientHandler= new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+            client = new HttpClient(clientHandler);
+            /*{
                 //UseDefaultCredentials = true,
                 UseDefaultCredentials = false,
                 ClientCertificateOptions = ClientCertificateOption.Manual,
-                ServerCertificateCustomValidationCallback =  (httpRequestMessage, cert, cetChain, policyErrors) =>
-                {
-                    return true;
-                },         
+                ServerCertificateCustomValidationCallback = (httpRequestMessage, cert, cetChain, policyErrors) =>
+               {
+                   return true;
+               },
                 //SslProtocols = System.Security.Authentication.SslProtocols.None
-            });
+            });*/
 
         }
 
@@ -36,7 +43,10 @@ namespace LecturaYEscritura.UseCases.Home
          * This can be used with Basic authentication for PI Web API. */
         public PIWebApiClient(string userName, string password)
         {
-            client = new HttpClient();   
+            clientHandler = new HttpClientHandler();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+            client = new HttpClient(clientHandler);
             string authInfo = Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(String.Format("{0}:{1}", userName, password)));
             client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", authInfo);
         }
@@ -68,7 +78,7 @@ namespace LecturaYEscritura.UseCases.Home
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
             client.DefaultRequestHeaders.Add("X-Requested-With", "message/http");
             HttpResponseMessage response = await client.PostAsync(uri, new StringContent(data, Encoding.UTF8, "application/json"));
-            
+
             string content = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
             {

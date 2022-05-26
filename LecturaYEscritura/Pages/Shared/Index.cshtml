@@ -306,9 +306,8 @@
             data.length = 0;
             $('#cards').empty();
             $.ajax({
-                type: "POST",
-                url: "/Home/GetTagsInfo",
-                traditional: true,
+                type: "GET",
+                url: "/PIWebAPI/GetTagsInfo",
                 success: (response) => {
                     let process = JSON.parse(response.process);
                     for (let i = 0; i < process.length; i++) {
@@ -342,7 +341,7 @@
         //    $('#cards').empty();
         //    $.ajax({
         //        type: "POST",
-        //        url: "/Home/GetTagListValues",
+        //        url: "/PIWebAPI/GetTagListValues",
         //        traditional: true,
         //        success: (response) => {
         //            let process = JSON.parse(response.process);
@@ -374,7 +373,7 @@
             console.log("WebID", webId);
             $.ajax({
                 type: "POST",
-                url: "/Home/GetTagData",
+                url: "/PIWebAPI/GetTagData",
                 traditional: true,
                 data: {
                     "webId": webId
@@ -522,7 +521,7 @@
                     console.log("WebId: ", webId);
                     $.ajax({
                         type: "POST",
-                        url: "/Home/PostData",
+                        url: "/PIWebAPI/PostData",
                         traditional: true,
                         data: {
                             "webId": webId,
